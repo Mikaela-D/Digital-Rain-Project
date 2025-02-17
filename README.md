@@ -1,3 +1,3 @@
-# C++ Digital Rainfall
+# C++ Digital Rain
 
-C++ Digital Rainfall project that simulates rainfall
+C++ Digital Rain project that simulates rainfall
