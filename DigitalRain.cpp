@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 
               _,-'/-'/
@@ -17,6 +17,8 @@ Mikaela Diaz
 #include <thread>
 #include <chrono>
 #include <random>
+#include <vector>
+#include <string>
 
 // Generate random integer
 int randomInt(int min, int max) {
@@ -26,13 +28,24 @@ int randomInt(int min, int max) {
     return dist(gen);
 }
 
+std::string randomChars(int length) {
+    const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()[]{}|<>";
+    std::string result = "";
+    for (int i = 0; i < length; ++i) {
+        result += chars[randomInt(0, chars.length() - 1)];
+    }
+    return result;
+}
+
 void simulateRainfall(int width, int height, int numRaindrops) {
     std::vector<Raindrop> raindrops;
     for (int i = 0; i < numRaindrops; ++i) {
-        raindrops.push_back({ randomInt(0, width - 1), randomInt(0, height - 1), randomInt(10, 15) });
+        raindrops.push_back({ randomInt(0, width - 1), randomInt(0, height - 1), randomInt(10, 15), randomChars(randomInt(3, 5)) });
     }
 
-    std::cout << "\033[?25l";
+    std::cout << "\033[?25l";  // Hide cursor 
+
+    std::cout << "\033[32m";  // Set rainfall color to green
 
     while (true) {
         for (int y = 0; y < height; ++y) {
@@ -40,7 +53,7 @@ void simulateRainfall(int width, int height, int numRaindrops) {
                 bool printedRaindrop = false;
                 for (const auto& drop : raindrops) {
                     if (x == drop.x && y >= drop.y - drop.length + 1 && y <= drop.y) {
-                        std::cout << "*";
+                        std::cout << drop.symbols[(y - drop.y + drop.length - 1) % drop.symbols.length()];  // Print character from the raindrop's symbols
                         printedRaindrop = true; // Mark that a raindrop is printed here
                         break;
                     }
@@ -57,11 +70,12 @@ void simulateRainfall(int width, int height, int numRaindrops) {
             if (drop.y >= height) {
                 drop.y = 0;
                 drop.x = randomInt(0, width - 1);
-                drop.length = randomInt(10, 15);  // Assign a new random length to the raindrop
+                drop.length = randomInt(10, 15); // Assign a new random length to the raindrop
+                drop.symbols = randomChars(randomInt(3, 5)); // New random symbols for each raindrop
             }
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Speed of the animation
 
         std::cout << "\033[H"; // Move the cursor back to the top-left corner
     }
