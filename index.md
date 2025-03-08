@@ -1,6 +1,5 @@
 ---
 layout: home
-title: Digital Rain Project
 ---
 
 # Welcome to My Digital Rain Project Blog
