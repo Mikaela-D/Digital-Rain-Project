@@ -1,3 +1,8 @@
-title: "My Awesome Project"
-description: "An awesome project that does amazing things!"
-theme: jekyll-theme-minimal
+# Site settings
+title: C++ Digital Rain Project
+author:
+  name: Mikaela Diaz
+description: "C++ Digital Rain Project for my final year of university"
+
+# Build settings
+remote_theme: jekyll/minima
