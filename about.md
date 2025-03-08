@@ -10,4 +10,3 @@ Developed using:
 - **C++ Standard Library**
 - **Object-Oriented Design**
 - **Multithreading & Animation**
-```
