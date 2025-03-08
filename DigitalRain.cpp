@@ -65,27 +65,31 @@ void simulateRainfall(int width, int height, int numRaindrops) {
     std::cout << "\033[?25l";  // Hide cursor 
 
     while (true) {
-        for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {
-                bool printedRaindrop = false;
-                for (const auto& drop : raindrops) {
-                    if (x == drop.x && y >= drop.y - drop.length + 1 && y <= drop.y) {
-                        int index = (y - drop.y + drop.length - 1) % drop.symbols.length();
-                        std::cout << drop.colors[index] << drop.symbols[index];  // Print character with its assigned color
-                        printedRaindrop = true; // Mark that a raindrop is printed here
-                        break;
-                    }
-                }
-                if (!printedRaindrop) {
-                    std::cout << " "; // Print a space
+        std::vector<std::vector<char>> screen(height, std::vector<char>(width, ' '));
+        std::vector<std::vector<std::string>> colorScreen(height, std::vector<std::string>(width, "\033[0m"));
+
+        for (auto& drop : raindrops) {
+            for (int i = 0; i < drop.length; ++i) {
+                int y = drop.y - i;
+                if (y >= 0 && y < height) {
+                    int index = i % drop.symbols.length();
+                    screen[y][drop.x] = drop.symbols[index];
+                    colorScreen[y][drop.x] = drop.colors[index];
                 }
             }
-            std::cout << std::endl; // Move to the next line
         }
+
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
+                std::cout << colorScreen[y][x] << screen[y][x];
+            }
+            std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
+        }
+
         // Move each raindrop downwards
         for (auto& drop : raindrops) {
             drop.y++;
-            if (drop.y >= height) {
+            if (drop.y - drop.length >= height) {
                 drop.y = 0;
                 drop.x = randomInt(0, width - 1);
                 drop.length = randomInt(10, 15); // Assign a new random length to the raindrop
@@ -97,7 +101,7 @@ void simulateRainfall(int width, int height, int numRaindrops) {
             }
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Speed of the animation
+        std::this_thread::sleep_for(std::chrono::milliseconds(50)); // Speed of the animation
 
         std::cout << "\033[H"; // Move the cursor back to the top-left corner
     }
