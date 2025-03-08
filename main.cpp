@@ -14,9 +14,9 @@ Mikaela Diaz
 #include "DigitalRain.h"
 
 int main() {
-    int width = 80; // Increase the width
-    int height = 20;
-    int numRaindrops = 5;
+    int width = 120; // Increase the width
+    int height = 25;
+    int numRaindrops = 10; // Increased the number of raindrops
 
     simulateRainfall(width, height, numRaindrops);
 
