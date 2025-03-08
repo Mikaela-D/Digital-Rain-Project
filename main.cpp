@@ -14,7 +14,7 @@ Mikaela Diaz
 #include "DigitalRain.h"
 
 int main() {
-    int width = 30;
+    int width = 80; // Increase the width
     int height = 20;
     int numRaindrops = 5;
 
