@@ -14,12 +14,11 @@ Mikaela Diaz
 #include "DigitalRain.h"
 
 int main() {
-    // Screen dimensions
-    int width = 30;
-    int height = 20;
-    int numRaindrops = 5;
+    int width = 120;
+    int height = 25;
+    int numRaindrops = 10;
 
-    simulateRainfall(width, height, numRaindrops);  // Start the rainfall simulation
+    simulateRainfall(width, height, numRaindrops);
 
     return 0;
 }
