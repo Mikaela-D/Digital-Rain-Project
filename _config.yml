@@ -1,7 +1,5 @@
 title: C++ Digital Rain Project
 author:
-  name: Mikaela Diaz
-description: "C++ Digital Rain Project for my final year of university"
-
-# Use the theme
-theme: minima  # Use built-in Minima theme
+  name: "Mikaela Diaz"
+description: "C++ Digital Rain Project"
+theme: minima 
