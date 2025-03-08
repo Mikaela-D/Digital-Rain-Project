@@ -1,3 +1,7 @@
-title: "C++ Digital Rain Project"
+title: C++ Digital Rain Project
+author:
+  name: Mikaela Diaz
 description: "C++ Digital Rain Project for my final year of university"
-theme: jekyll-theme-minimal
+
+# Use the theme
+theme: minima  # Use built-in Minima theme
