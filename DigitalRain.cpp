@@ -86,6 +86,9 @@ void simulateRainfall(int width, int height, int numRaindrops) {
             std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
         }
 
+        // Print the ground line
+        std::cout << std::string(width, '_') << std::endl;
+
         // Move each raindrop downwards
         for (auto& drop : raindrops) {
             drop.y++;
