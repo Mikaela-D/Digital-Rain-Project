@@ -21,7 +21,7 @@ struct Raindrop {
     int y;
     int length;
     std::string symbols;
-    std::vector<std::string> colors; // Add a vector to store colors for each character
+    std::vector<std::string> colors; // Store colors for each character
 };
 
 int randomInt(int min, int max);
