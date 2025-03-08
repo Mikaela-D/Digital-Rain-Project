@@ -54,7 +54,12 @@ std::string randomColor() {
 void simulateRainfall(int width, int height, int numRaindrops) {
     std::vector<Raindrop> raindrops;
     for (int i = 0; i < numRaindrops; ++i) {
-        raindrops.push_back({ randomInt(0, width - 1), randomInt(0, height - 1), randomInt(10, 15), randomChars(randomInt(3, 5)) });
+        std::string symbols = randomChars(randomInt(3, 5));
+        std::vector<std::string> colors;
+        for (char c : symbols) {
+            colors.push_back(randomColor());
+        }
+        raindrops.push_back({ randomInt(0, width - 1), randomInt(0, height - 1), randomInt(10, 15), symbols, colors });
     }
 
     std::cout << "\033[?25l";  // Hide cursor 
@@ -65,7 +70,8 @@ void simulateRainfall(int width, int height, int numRaindrops) {
                 bool printedRaindrop = false;
                 for (const auto& drop : raindrops) {
                     if (x == drop.x && y >= drop.y - drop.length + 1 && y <= drop.y) {
-                        std::cout << randomColor() << drop.symbols[(y - drop.y + drop.length - 1) % drop.symbols.length()];  // Print character with random color
+                        int index = (y - drop.y + drop.length - 1) % drop.symbols.length();
+                        std::cout << drop.colors[index] << drop.symbols[index];  // Print character with its assigned color
                         printedRaindrop = true; // Mark that a raindrop is printed here
                         break;
                     }
@@ -84,6 +90,10 @@ void simulateRainfall(int width, int height, int numRaindrops) {
                 drop.x = randomInt(0, width - 1);
                 drop.length = randomInt(10, 15); // Assign a new random length to the raindrop
                 drop.symbols = randomChars(randomInt(3, 5)); // New random symbols for each raindrop
+                drop.colors.clear();
+                for (char c : drop.symbols) {
+                    drop.colors.push_back(randomColor());
+                }
             }
         }
 
