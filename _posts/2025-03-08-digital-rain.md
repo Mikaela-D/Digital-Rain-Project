@@ -71,7 +71,7 @@ These are the resources I used while working on the project:
 - Online resource on Matrix Rain algorithms: https://en.wikipedia.org/wiki/Matrix_digital_rain
 - Matrix Digital Rain code example: https://github.com/Kevger/MatrixDigitalRain
 - Digital Rain Project blog: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html
-- Neo Matris Digital Rain code: https://github.com/st3w/neo
+- Neo Matrix Digital Rain code: https://github.com/st3w/neo
 - ANSI color escape sequences: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 - How to print colored text: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/
 - Random number generation: https://www.digitalocean.com/community/tutorials/random-number-generator-c-plus-plus
