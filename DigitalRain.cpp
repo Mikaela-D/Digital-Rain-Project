@@ -37,6 +37,20 @@ std::string randomChars(int length) {
     return result;
 }
 
+// Function to generate a random color code
+std::string randomColor() {
+    const std::string colors[] = {
+        "\033[31m", // Red
+        "\033[32m", // Green
+        "\033[33m", // Yellow
+        "\033[34m", // Blue
+        "\033[35m", // Magenta
+        "\033[36m", // Cyan
+        "\033[37m"  // White
+    };
+    return colors[randomInt(0, 6)];
+}
+
 void simulateRainfall(int width, int height, int numRaindrops) {
     std::vector<Raindrop> raindrops;
     for (int i = 0; i < numRaindrops; ++i) {
@@ -45,15 +59,13 @@ void simulateRainfall(int width, int height, int numRaindrops) {
 
     std::cout << "\033[?25l";  // Hide cursor 
 
-    std::cout << "\033[32m";  // Set rainfall color to green
-
     while (true) {
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
                 bool printedRaindrop = false;
                 for (const auto& drop : raindrops) {
                     if (x == drop.x && y >= drop.y - drop.length + 1 && y <= drop.y) {
-                        std::cout << drop.symbols[(y - drop.y + drop.length - 1) % drop.symbols.length()];  // Print character from the raindrop's symbols
+                        std::cout << randomColor() << drop.symbols[(y - drop.y + drop.length - 1) % drop.symbols.length()];  // Print character with random color
                         printedRaindrop = true; // Mark that a raindrop is printed here
                         break;
                     }
