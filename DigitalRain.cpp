@@ -28,9 +28,11 @@ int randomInt(int min, int max) {
     return dist(gen);
 }
 
+// Generate a string of random characters
 std::string randomChars(int length) {
     const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()[]{}|<>";
-    std::string result = "";
+    std::string result;
+    result.reserve(length);
     for (int i = 0; i < length; ++i) {
         result += chars[randomInt(0, chars.length() - 1)];
     }
@@ -51,11 +53,14 @@ std::string randomColor() {
     return colors[randomInt(0, 6)];
 }
 
+// Function to simulate rainfall
 void simulateRainfall(int width, int height, int numRaindrops) {
     std::vector<Raindrop> raindrops;
+    raindrops.reserve(numRaindrops);
     for (int i = 0; i < numRaindrops; ++i) {
         std::string symbols = randomChars(randomInt(3, 5));
         std::vector<std::string> colors;
+        colors.reserve(symbols.length());
         for (char c : symbols) {
             colors.push_back(randomColor());
         }

@@ -16,6 +16,7 @@ Mikaela Diaz
 #include <vector>
 #include <string>
 
+// Structure to represent a raindrop
 struct Raindrop {
     int x;
     int y;
@@ -24,6 +25,7 @@ struct Raindrop {
     std::vector<std::string> colors; // Store colors for each character
 };
 
+// Function declarations
 int randomInt(int min, int max);
 std::string randomChars(int length);
 void simulateRainfall(int width, int height, int numRaindrops);

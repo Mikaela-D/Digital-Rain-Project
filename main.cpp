@@ -18,6 +18,7 @@ int main() {
     int height = 25;
     int numRaindrops = 10;
 
+    // Improved function call with better parameter names
     simulateRainfall(width, height, numRaindrops);
 
     return 0;
