@@ -20,6 +20,7 @@ Mikaela Diaz
 #include <vector>
 #include <string>
 #include <stdexcept> // Include for exception handling
+#include <algorithm> // Include for std::for_each
 
 // Generate random integer
 int randomInt(int min, int max) {
@@ -84,7 +85,8 @@ void simulateRainfall(int width, int height, int numRaindrops) {
         std::vector<std::vector<char>> screen(height, std::vector<char>(width, ' '));
         std::vector<std::vector<std::string>> colorScreen(height, std::vector<std::string>(width, "\033[0m"));
 
-        for (auto& drop : raindrops) {
+        // Update screen and color data using std::for_each
+        std::for_each(raindrops.begin(), raindrops.end(), [&](Raindrop& drop) {
             for (int i = 0; i < drop.length; ++i) {
                 int y = drop.y - i;
                 if (y >= 0 && y < height) {
@@ -93,7 +95,7 @@ void simulateRainfall(int width, int height, int numRaindrops) {
                     colorScreen[y][drop.x] = drop.colors[index];
                 }
             }
-        }
+        });
 
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
@@ -105,8 +107,8 @@ void simulateRainfall(int width, int height, int numRaindrops) {
         // Print the ground line
         std::cout << std::string(width, '_') << std::endl;
 
-        // Move each raindrop downwards
-        for (auto& drop : raindrops) {
+        // Move each raindrop downwards using std::for_each
+        std::for_each(raindrops.begin(), raindrops.end(), [&](Raindrop& drop) {
             drop.y++;
             if (drop.y - drop.length >= height) {
                 drop.y = 0;
@@ -118,7 +120,7 @@ void simulateRainfall(int width, int height, int numRaindrops) {
                     drop.colors.push_back(randomColor());
                 }
             }
-        }
+        });
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50)); // Speed of the animation
 
