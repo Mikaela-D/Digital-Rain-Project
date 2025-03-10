@@ -22,6 +22,18 @@ Mikaela Diaz
 #include <stdexcept> // Include for exception handling
 #include <algorithm> // Include for std::for_each
 
+// Constants for color codes
+const std::string RED = "\033[31m";
+const std::string GREEN = "\033[32m";
+const std::string YELLOW = "\033[33m";
+const std::string BLUE = "\033[34m";
+const std::string MAGENTA = "\033[35m";
+const std::string CYAN = "\033[36m";
+const std::string WHITE = "\033[37m";
+
+const std::string COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
+const int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
+
 // Generate random integer
 int randomInt(int min, int max) {
     if (min > max) {
@@ -49,16 +61,7 @@ std::string randomChars(int length) {
 
 // Function to generate a random color code
 std::string randomColor() {
-    const std::string colors[] = {
-        "\033[31m", // Red
-        "\033[32m", // Green
-        "\033[33m", // Yellow
-        "\033[34m", // Blue
-        "\033[35m", // Magenta
-        "\033[36m", // Cyan
-        "\033[37m"  // White
-    };
-    return colors[randomInt(0, 6)];
+    return COLORS[randomInt(0, NUM_COLORS - 1)];
 }
 
 // Function to generate raindrops
