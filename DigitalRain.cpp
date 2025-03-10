@@ -27,8 +27,8 @@ int randomInt(int min, int max) {
     if (min > max) {
         throw std::invalid_argument("min should not be greater than max");
     }
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
+    thread_local std::random_device rd;
+    thread_local std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(min, max);
     return dist(gen);
 }
@@ -118,27 +118,31 @@ void simulateRainfall(const SimulationConfig& config) {
 
     std::cout << "\033[?25l";  // Hide cursor 
 
-    while (true) {
-        std::vector<std::vector<char>> screen(config.height, std::vector<char>(config.width, ' '));
-        std::vector<std::vector<std::string>> colorScreen(config.height, std::vector<std::string>(config.width, "\033[0m"));
+    try {
+        while (true) {
+            std::vector<std::vector<char>> screen(config.height, std::vector<char>(config.width, ' '));
+            std::vector<std::vector<std::string>> colorScreen(config.height, std::vector<std::string>(config.width, "\033[0m"));
 
-        updateScreen(screen, colorScreen, raindrops, config.height);
+            updateScreen(screen, colorScreen, raindrops, config.height);
 
-        for (int y = 0; y < config.height; ++y) {
-            for (int x = 0; x < config.width; ++x) {
-                std::cout << colorScreen[y][x] << screen[y][x];
+            for (int y = 0; y < config.height; ++y) {
+                for (int x = 0; x < config.width; ++x) {
+                    std::cout << colorScreen[y][x] << screen[y][x];
+                }
+                std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
             }
-            std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
+
+            // Print the ground line
+            std::cout << std::string(config.width, '_') << std::endl;
+
+            moveRaindrops(raindrops, config);
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(config.animationSpeed)); // Speed of the animation
+
+            std::cout << "\033[H"; // Move the cursor back to the top-left corner
         }
-
-        // Print the ground line
-        std::cout << std::string(config.width, '_') << std::endl;
-
-        moveRaindrops(raindrops, config);
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(config.animationSpeed)); // Speed of the animation
-
-        std::cout << "\033[H"; // Move the cursor back to the top-left corner
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 
     std::cout << "\033[?25h";  // Show the cursor again when the simulation ends
