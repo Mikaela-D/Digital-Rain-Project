@@ -26,9 +26,21 @@ struct Raindrop {
     std::vector<std::string> colors; // Store colors for each character
 };
 
+// Structure to hold simulation parameters
+struct SimulationConfig {
+    int width;
+    int height;
+    int numRaindrops;
+    int raindropLengthMin;
+    int raindropLengthMax;
+    int symbolLengthMin;
+    int symbolLengthMax;
+    int animationSpeed;
+};
+
 // Function declarations
 int randomInt(int min, int max);
 std::string randomChars(int length);
-void simulateRainfall(int width, int height, int numRaindrops);
+void simulateRainfall(const SimulationConfig& config);
 
 #endif
