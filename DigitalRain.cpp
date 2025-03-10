@@ -19,9 +19,13 @@ Mikaela Diaz
 #include <random>
 #include <vector>
 #include <string>
+#include <stdexcept> // Include for exception handling
 
 // Generate random integer
 int randomInt(int min, int max) {
+    if (min > max) {
+        throw std::invalid_argument("min should not be greater than max");
+    }
     static std::random_device rd;
     static std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(min, max);
@@ -30,6 +34,9 @@ int randomInt(int min, int max) {
 
 // Generate a string of random characters
 std::string randomChars(int length) {
+    if (length <= 0) {
+        throw std::invalid_argument("length should be greater than 0");
+    }
     const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()[]{}|<>";
     std::string result;
     result.reserve(length);
@@ -55,6 +62,10 @@ std::string randomColor() {
 
 // Function to simulate rainfall
 void simulateRainfall(int width, int height, int numRaindrops) {
+    if (width <= 0 || height <= 0 || numRaindrops <= 0) {
+        throw std::invalid_argument("width, height, and numRaindrops should be greater than 0");
+    }
+
     std::vector<Raindrop> raindrops;
     raindrops.reserve(numRaindrops);
     for (int i = 0; i < numRaindrops; ++i) {

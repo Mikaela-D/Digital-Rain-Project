@@ -15,6 +15,7 @@ Mikaela Diaz
 
 #include <vector>
 #include <string>
+#include <stdexcept> // Include for exception handling
 
 // Structure to represent a raindrop
 struct Raindrop {
