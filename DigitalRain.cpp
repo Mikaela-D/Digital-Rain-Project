@@ -34,6 +34,38 @@ const std::string WHITE = "\033[37m";
 const std::string COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
 const int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
 
+// Raindrop class implementation
+Raindrop::Raindrop(int x, int y, int length, const std::string& symbols, const std::vector<std::string>& colors)
+    : x(x), y(y), length(length), symbols(symbols), colors(colors) {}
+
+int Raindrop::getX() const { return x; }
+int Raindrop::getY() const { return y; }
+int Raindrop::getLength() const { return length; }
+const std::string& Raindrop::getSymbols() const { return symbols; }
+const std::vector<std::string>& Raindrop::getColors() const { return colors; }
+
+void Raindrop::setX(int newX) { x = newX; }
+void Raindrop::setY(int newY) { y = newY; }
+void Raindrop::setLength(int newLength) { length = newLength; }
+void Raindrop::setSymbols(const std::string& newSymbols) { symbols = newSymbols; }
+void Raindrop::setColors(const std::vector<std::string>& newColors) { colors = newColors; }
+
+// SimulationConfig class implementation
+SimulationConfig::SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax,
+                                   int symbolLengthMin, int symbolLengthMax, int animationSpeed)
+    : width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin),
+      raindropLengthMax(raindropLengthMax), symbolLengthMin(symbolLengthMin), symbolLengthMax(symbolLengthMax),
+      animationSpeed(animationSpeed) {}
+
+int SimulationConfig::getWidth() const { return width; }
+int SimulationConfig::getHeight() const { return height; }
+int SimulationConfig::getNumRaindrops() const { return numRaindrops; }
+int SimulationConfig::getRaindropLengthMin() const { return raindropLengthMin; }
+int SimulationConfig::getRaindropLengthMax() const { return raindropLengthMax; }
+int SimulationConfig::getSymbolLengthMin() const { return symbolLengthMin; }
+int SimulationConfig::getSymbolLengthMax() const { return symbolLengthMax; }
+int SimulationConfig::getAnimationSpeed() const { return animationSpeed; }
+
 // Generate random integer
 int randomInt(int min, int max) {
     if (min > max) {
@@ -82,7 +114,7 @@ std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
 
 // Function to update the screen and color data
 void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vector<std::string>>& colorScreen, const std::vector<Raindrop>& raindrops, int height) {
-    std::for_each(raindrops.begin(), raindrops.end(), [&](const Raindrop& drop) {
+    for (const auto& drop : raindrops) {
         for (int i = 0; i < drop.getLength(); ++i) {
             int y = drop.getY() - i;
             if (y >= 0 && y < height) {
@@ -91,12 +123,12 @@ void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vecto
                 colorScreen[y][drop.getX()] = drop.getColors()[index];
             }
         }
-    });
+    }
 }
 
 // Function to move raindrops downwards
 void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config) {
-    std::for_each(raindrops.begin(), raindrops.end(), [&](Raindrop& drop) {
+    for (auto& drop : raindrops) {
         drop.setY(drop.getY() + 1);
         if (drop.getY() - drop.getLength() >= config.getHeight()) {
             drop.setY(0);
@@ -109,7 +141,7 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& con
             }
             drop.setColors(newColors);
         }
-    });
+    }
 }
 
 // Function to simulate rainfall
@@ -118,7 +150,7 @@ void simulateRainfall(const SimulationConfig& config) {
         throw std::invalid_argument("width, height, and numRaindrops should be greater than 0");
     }
 
-    std::vector<Raindrop> raindrops = generateRaindrops(config);
+    auto raindrops = generateRaindrops(config);
 
     std::cout << "\033[?25l";  // Hide cursor 
 
