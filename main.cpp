@@ -14,16 +14,7 @@ Mikaela Diaz
 #include "DigitalRain.h"
 
 int main() {
-    SimulationConfig config = {
-        120, // width
-        25,  // height
-        10,  // numRaindrops
-        10,  // raindropLengthMin
-        15,  // raindropLengthMax
-        3,   // symbolLengthMin
-        5,   // symbolLengthMax
-        50   // animationSpeed (milliseconds)
-    };
+    SimulationConfig config(120, 25, 10, 10, 15, 3, 5, 50);
 
     simulateRainfall(config);
 

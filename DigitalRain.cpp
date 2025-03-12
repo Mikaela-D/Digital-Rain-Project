@@ -67,15 +67,15 @@ std::string randomColor() {
 // Function to generate raindrops
 std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
     std::vector<Raindrop> raindrops;
-    raindrops.reserve(config.numRaindrops);
-    for (int i = 0; i < config.numRaindrops; ++i) {
-        std::string symbols = randomChars(randomInt(config.symbolLengthMin, config.symbolLengthMax));
+    raindrops.reserve(config.getNumRaindrops());
+    for (int i = 0; i < config.getNumRaindrops(); ++i) {
+        std::string symbols = randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()));
         std::vector<std::string> colors;
         colors.reserve(symbols.length());
         for (char c : symbols) {
             colors.push_back(randomColor());
         }
-        raindrops.push_back({ randomInt(0, config.width - 1), randomInt(0, config.height - 1), randomInt(config.raindropLengthMin, config.raindropLengthMax), symbols, colors });
+        raindrops.emplace_back(randomInt(0, config.getWidth() - 1), randomInt(0, config.getHeight() - 1), randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax()), symbols, colors);
     }
     return raindrops;
 }
@@ -83,12 +83,12 @@ std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
 // Function to update the screen and color data
 void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vector<std::string>>& colorScreen, const std::vector<Raindrop>& raindrops, int height) {
     std::for_each(raindrops.begin(), raindrops.end(), [&](const Raindrop& drop) {
-        for (int i = 0; i < drop.length; ++i) {
-            int y = drop.y - i;
+        for (int i = 0; i < drop.getLength(); ++i) {
+            int y = drop.getY() - i;
             if (y >= 0 && y < height) {
-                int index = i % drop.symbols.length();
-                screen[y][drop.x] = drop.symbols[index];
-                colorScreen[y][drop.x] = drop.colors[index];
+                int index = i % drop.getSymbols().length();
+                screen[y][drop.getX()] = drop.getSymbols()[index];
+                colorScreen[y][drop.getX()] = drop.getColors()[index];
             }
         }
     });
@@ -97,23 +97,24 @@ void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vecto
 // Function to move raindrops downwards
 void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config) {
     std::for_each(raindrops.begin(), raindrops.end(), [&](Raindrop& drop) {
-        drop.y++;
-        if (drop.y - drop.length >= config.height) {
-            drop.y = 0;
-            drop.x = randomInt(0, config.width - 1);
-            drop.length = randomInt(config.raindropLengthMin, config.raindropLengthMax); // Assign a new random length to the raindrop
-            drop.symbols = randomChars(randomInt(config.symbolLengthMin, config.symbolLengthMax)); // New random symbols for each raindrop
-            drop.colors.clear();
-            for (char c : drop.symbols) {
-                drop.colors.push_back(randomColor());
+        drop.setY(drop.getY() + 1);
+        if (drop.getY() - drop.getLength() >= config.getHeight()) {
+            drop.setY(0);
+            drop.setX(randomInt(0, config.getWidth() - 1));
+            drop.setLength(randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax())); // Assign a new random length to the raindrop
+            drop.setSymbols(randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()))); // New random symbols for each raindrop
+            std::vector<std::string> newColors;
+            for (char c : drop.getSymbols()) {
+                newColors.push_back(randomColor());
             }
+            drop.setColors(newColors);
         }
     });
 }
 
 // Function to simulate rainfall
 void simulateRainfall(const SimulationConfig& config) {
-    if (config.width <= 0 || config.height <= 0 || config.numRaindrops <= 0) {
+    if (config.getWidth() <= 0 || config.getHeight() <= 0 || config.getNumRaindrops() <= 0) {
         throw std::invalid_argument("width, height, and numRaindrops should be greater than 0");
     }
 
@@ -123,24 +124,24 @@ void simulateRainfall(const SimulationConfig& config) {
 
     try {
         while (true) {
-            std::vector<std::vector<char>> screen(config.height, std::vector<char>(config.width, ' '));
-            std::vector<std::vector<std::string>> colorScreen(config.height, std::vector<std::string>(config.width, "\033[0m"));
+            std::vector<std::vector<char>> screen(config.getHeight(), std::vector<char>(config.getWidth(), ' '));
+            std::vector<std::vector<std::string>> colorScreen(config.getHeight(), std::vector<std::string>(config.getWidth(), "\033[0m"));
 
-            updateScreen(screen, colorScreen, raindrops, config.height);
+            updateScreen(screen, colorScreen, raindrops, config.getHeight());
 
-            for (int y = 0; y < config.height; ++y) {
-                for (int x = 0; x < config.width; ++x) {
+            for (int y = 0; y < config.getHeight(); ++y) {
+                for (int x = 0; x < config.getWidth(); ++x) {
                     std::cout << colorScreen[y][x] << screen[y][x];
                 }
                 std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
             }
 
             // Print the ground line
-            std::cout << std::string(config.width, '_') << std::endl;
+            std::cout << std::string(config.getWidth(), '_') << std::endl;
 
             moveRaindrops(raindrops, config);
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(config.animationSpeed)); // Speed of the animation
+            std::this_thread::sleep_for(std::chrono::milliseconds(config.getAnimationSpeed())); // Speed of the animation
 
             std::cout << "\033[H"; // Move the cursor back to the top-left corner
         }
