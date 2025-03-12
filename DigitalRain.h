@@ -15,6 +15,7 @@ Mikaela Diaz
 
 #include <vector>
 #include <string>
+#include <memory> // Include for smart pointers
 
 // Class to represent a raindrop
 class Raindrop {
@@ -70,6 +71,10 @@ private:
 // Function declarations
 int randomInt(int min, int max);
 std::string randomChars(int length);
+std::string randomColor();
+std::vector<Raindrop> generateRaindrops(const SimulationConfig& config);
+void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vector<std::string>>& colorScreen, const std::vector<Raindrop>& raindrops, int height);
+void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config);
 void simulateRainfall(const SimulationConfig& config);
 
 #endif

@@ -21,6 +21,7 @@ Mikaela Diaz
 #include <string>
 #include <stdexcept> // Include for exception handling
 #include <algorithm> // Include for std::for_each
+#include <memory> // Include for smart pointers
 
 // Constants for color codes
 const std::string RED = "\033[31m";
