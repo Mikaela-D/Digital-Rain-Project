@@ -26,16 +26,16 @@ DigitalRain.cpp
 #include <memory> // Include for smart pointers
 
 // Constants for color codes
-const std::string RED = "\033[31m";
-const std::string GREEN = "\033[32m";
-const std::string YELLOW = "\033[33m";
-const std::string BLUE = "\033[34m";
-const std::string MAGENTA = "\033[35m";
-const std::string CYAN = "\033[36m";
-const std::string WHITE = "\033[37m";
+constexpr const char* RED = "\033[31m";
+constexpr const char* GREEN = "\033[32m";
+constexpr const char* YELLOW = "\033[33m";
+constexpr const char* BLUE = "\033[34m";
+constexpr const char* MAGENTA = "\033[35m";
+constexpr const char* CYAN = "\033[36m";
+constexpr const char* WHITE = "\033[37m";
 
-const std::string COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
-const int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
+constexpr const char* COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
+constexpr int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
 
 // Raindrop class implementation
 Raindrop::Raindrop(int x, int y, int length, const std::string& symbols, const std::vector<std::string>& colors)
@@ -108,7 +108,7 @@ std::vector<std::unique_ptr<Raindrop>> generateRaindrops(const SimulationConfig&
     for (int i = 0; i < config.getNumRaindrops(); ++i) {
         std::string symbols = randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()));
         std::vector<std::string> colors;
-        colors.reserve(symbols.length());
+        colors.reserve(symbols.length()); // Reserve space for colors
         for (char c : symbols) {
             colors.push_back(randomColor());
         }
