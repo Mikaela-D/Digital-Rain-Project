@@ -12,9 +12,9 @@ Mikaela Diaz
 main.cpp
 */
 
-#include <iostream>
 #include "DigitalRain.h"
 #include "Test.h"
+#include <iostream>        // cout, endl
 
 int main() {
 	// Create a simulation configuration with specific parameters

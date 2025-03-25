@@ -12,19 +12,19 @@ Mikaela Diaz
 DigitalRain.cpp
 */
 
-#include "DigitalRain.h"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <thread>
-#include <chrono>
-#include <random>
-#include <vector>
-#include <string>
-#include <stdexcept> // Include for exception handling
-#include <algorithm> // Include for std::for_each
-#include <array> // Include for std::array
-#include <memory> // Include for smart pointers
+#include "DigitalRain.h" 
+#include <iostream>     // cout, endl
+#include <vector>       // vector
+#include <string>       // string
+#include <cstdlib>      // rand, srand
+#include <ctime>        // time
+#include <thread>       // for this_thread::sleep_for
+#include <chrono>       // for chrono::milliseconds
+#include <random>       // random_device, mt19937, uniform_int_distribution
+#include <stdexcept>    // invalid_argument
+#include <algorithm>    // for_each
+#include <array>        // array
+#include <memory>       // unique_ptr, make_unique
 
 // Constants for color codes
 constexpr const char* RED = "\033[31m";

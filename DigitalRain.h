@@ -15,10 +15,10 @@ DigitalRain.h
 #ifndef DIGITALRAIN_H
 #define DIGITALRAIN_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
+#include <iostream>     // cout, endl
+#include <vector>       // vector
+#include <string>       // string
+#include <memory>       // unique_ptr, make_unique
 
 // Template class to represent a raindrop
 template <typename SymbolType, typename ColorType>

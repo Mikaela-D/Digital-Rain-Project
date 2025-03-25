@@ -11,10 +11,11 @@ Test.cpp
 
 Mikaela Diaz
 */
-#include "Test.h"
+
 #include "DigitalRain.h"
-#include <iostream>
-#include <cassert>
+#include "Test.h"
+#include <iostream>        // cout, endl
+#include <cassert>         // assert
 
 void testRaindrop() {
 	Raindrop<std::string, std::string> drop(5, 10, 4, "ABCD", { "\033[31m", "\033[32m", "\033[33m", "\033[34m" });
