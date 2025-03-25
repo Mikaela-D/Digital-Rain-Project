@@ -8,6 +8,8 @@
        `---..__,,--'            ` -'. -'
 
 Mikaela Diaz
+
+DigitalRain.cpp
 */
 
 #include "DigitalRain.h"
@@ -34,10 +36,10 @@ const std::string WHITE = "\033[37m";
 
 const std::string COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
 const int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
-
 // Raindrop class implementation
 Raindrop::Raindrop(int x, int y, int length, const std::string& symbols, const std::vector<std::string>& colors)
-    : x(x), y(y), length(length), symbols(symbols), colors(colors) {}
+    : x(x), y(y), length(length), symbols(symbols), colors(colors) {
+}
 
 int Raindrop::getX() const { return x; }
 int Raindrop::getY() const { return y; }
@@ -53,10 +55,11 @@ void Raindrop::setColors(const std::vector<std::string>& newColors) { colors = n
 
 // SimulationConfig class implementation
 SimulationConfig::SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax,
-                                   int symbolLengthMin, int symbolLengthMax, int animationSpeed)
+    int symbolLengthMin, int symbolLengthMax, int animationSpeed)
     : width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin),
-      raindropLengthMax(raindropLengthMax), symbolLengthMin(symbolLengthMin), symbolLengthMax(symbolLengthMax),
-      animationSpeed(animationSpeed) {}
+    raindropLengthMax(raindropLengthMax), symbolLengthMin(symbolLengthMin), symbolLengthMax(symbolLengthMax),
+    animationSpeed(animationSpeed) {
+}
 
 int SimulationConfig::getWidth() const { return width; }
 int SimulationConfig::getHeight() const { return height; }
