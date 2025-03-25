@@ -1,9 +1,22 @@
+/*
+
+
+              _,-'/-'/
+  .      __,-; ,'( '/
+   \.    `-.__`-._`:_,-._       _ , . ``
+    `:-._,------' ` _,`--` -: `_ , ` ,' :
+       `---..__,,--'            ` -'. -'
+
+Mikaela Diaz
+
+DigitalRain.h
+*/
 #ifndef DIGITALRAIN_H
 #define DIGITALRAIN_H
 
 #include <vector>
 #include <string>
-#include <memory> // Include for smart pointers
+#include <memory> 
 
 // Class to represent a raindrop
 class Raindrop {
@@ -34,7 +47,7 @@ private:
 class SimulationConfig {
 public:
     SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax,
-                     int symbolLengthMin, int symbolLengthMax, int animationSpeed);
+        int symbolLengthMin, int symbolLengthMax, int animationSpeed);
 
     int getWidth() const;
     int getHeight() const;
