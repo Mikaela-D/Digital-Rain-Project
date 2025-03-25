@@ -36,6 +36,7 @@ const std::string WHITE = "\033[37m";
 
 const std::string COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
 const int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
+
 // Raindrop class implementation
 Raindrop::Raindrop(int x, int y, int length, const std::string& symbols, const std::vector<std::string>& colors)
     : x(x), y(y), length(length), symbols(symbols), colors(colors) {
@@ -101,8 +102,8 @@ std::string randomColor() {
 }
 
 // Function to generate raindrops
-std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
-    std::vector<Raindrop> raindrops;
+std::vector<std::unique_ptr<Raindrop>> generateRaindrops(const SimulationConfig& config) {
+    std::vector<std::unique_ptr<Raindrop>> raindrops;
     raindrops.reserve(config.getNumRaindrops());
     for (int i = 0; i < config.getNumRaindrops(); ++i) {
         std::string symbols = randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()));
@@ -111,39 +112,39 @@ std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
         for (char c : symbols) {
             colors.push_back(randomColor());
         }
-        raindrops.emplace_back(randomInt(0, config.getWidth() - 1), randomInt(0, config.getHeight() - 1), randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax()), symbols, colors);
+        raindrops.emplace_back(std::make_unique<Raindrop>(randomInt(0, config.getWidth() - 1), randomInt(0, config.getHeight() - 1), randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax()), symbols, colors));
     }
     return raindrops;
 }
 
 // Function to update the screen and color data
-void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vector<std::string>>& colorScreen, const std::vector<Raindrop>& raindrops, int height) {
+void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vector<std::string>>& colorScreen, const std::vector<std::unique_ptr<Raindrop>>& raindrops, int height) {
     for (const auto& drop : raindrops) {
-        for (int i = 0; i < drop.getLength(); ++i) {
-            int y = drop.getY() - i;
+        for (int i = 0; i < drop->getLength(); ++i) {
+            int y = drop->getY() - i;
             if (y >= 0 && y < height) {
-                int index = i % drop.getSymbols().length();
-                screen[y][drop.getX()] = drop.getSymbols()[index];
-                colorScreen[y][drop.getX()] = drop.getColors()[index];
+                int index = i % drop->getSymbols().length();
+                screen[y][drop->getX()] = drop->getSymbols()[index];
+                colorScreen[y][drop->getX()] = drop->getColors()[index];
             }
         }
     }
 }
 
 // Function to move raindrops downwards
-void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config) {
+void moveRaindrops(std::vector<std::unique_ptr<Raindrop>>& raindrops, const SimulationConfig& config) {
     for (auto& drop : raindrops) {
-        drop.setY(drop.getY() + 1);
-        if (drop.getY() - drop.getLength() >= config.getHeight()) {
-            drop.setY(0);
-            drop.setX(randomInt(0, config.getWidth() - 1));
-            drop.setLength(randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax())); // Assign a new random length to the raindrop
-            drop.setSymbols(randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()))); // New random symbols for each raindrop
+        drop->setY(drop->getY() + 1);
+        if (drop->getY() - drop->getLength() >= config.getHeight()) {
+            drop->setY(0);
+            drop->setX(randomInt(0, config.getWidth() - 1));
+            drop->setLength(randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax())); // Assign a new random length to the raindrop
+            drop->setSymbols(randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()))); // New random symbols for each raindrop
             std::vector<std::string> newColors;
-            for (char c : drop.getSymbols()) {
+            for (char c : drop->getSymbols()) {
                 newColors.push_back(randomColor());
             }
-            drop.setColors(newColors);
+            drop->setColors(newColors);
         }
     }
 }
@@ -181,7 +182,8 @@ void simulateRainfall(const SimulationConfig& config) {
 
             std::cout << "\033[H"; // Move the cursor back to the top-left corner
         }
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
 
