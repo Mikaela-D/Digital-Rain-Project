@@ -102,14 +102,14 @@ std::vector<std::unique_ptr<Raindrop<std::string, std::string>>> generateRaindro
 }
 
 // Function to update the screen and color data
-void updateScreen(std::vector<std::vector<char>>& screen, std::vector<std::vector<std::string>>& colorScreen, const std::vector<std::unique_ptr<Raindrop<std::string, std::string>>>& raindrops, int height) {
+void updateScreen(Matrix& matrix, const std::vector<std::unique_ptr<Raindrop<std::string, std::string>>>& raindrops) {
+	matrix.clear();
 	for (const auto& drop : raindrops) {
 		for (int i = 0; i < drop->getLength(); ++i) {
 			int y = drop->getY() - i;
-			if (y >= 0 && y < height) {
+			if (y >= 0 && y < matrix.getHeight()) {
 				int index = i % drop->getSymbols().length();
-				screen[y][drop->getX()] = drop->getSymbols()[index];
-				colorScreen[y][drop->getX()] = drop->getColors()[index];
+				matrix.setCell(drop->getX(), y, drop->getSymbols()[index], drop->getColors()[index]);
 			}
 		}
 	}
@@ -141,30 +141,16 @@ void simulateRainfall(const SimulationConfig& config) {
 	}
 
 	auto raindrops = generateRaindrops(config);
+	Matrix matrix(config.getWidth(), config.getHeight());
 
 	std::cout << "\033[?25l";  // Hide cursor 
 
 	try {
 		while (true) {
-			std::vector<std::vector<char>> screen(config.getHeight(), std::vector<char>(config.getWidth(), ' '));
-			std::vector<std::vector<std::string>> colorScreen(config.getHeight(), std::vector<std::string>(config.getWidth(), "\033[0m"));
-
-			updateScreen(screen, colorScreen, raindrops, config.getHeight());
-
-			for (int y = 0; y < config.getHeight(); ++y) {
-				for (int x = 0; x < config.getWidth(); ++x) {
-					std::cout << colorScreen[y][x] << screen[y][x];
-				}
-				std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
-			}
-
-			// Print the ground line
-			std::cout << std::string(config.getWidth(), '_') << std::endl;
-
+			updateScreen(matrix, raindrops);
+			matrix.print();
 			moveRaindrops(raindrops, config);
-
 			std::this_thread::sleep_for(std::chrono::milliseconds(config.getAnimationSpeed())); // Speed of the animation
-
 			std::cout << "\033[H"; // Move the cursor back to the top-left corner
 		}
 	}
