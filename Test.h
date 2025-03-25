@@ -15,6 +15,7 @@ Mikaela Diaz
 #ifndef TEST_H
 #define TEST_H
 
+// Tests function declarations
 void testRaindrop();
 void testMatrix();
 void testSimulationConfig();
