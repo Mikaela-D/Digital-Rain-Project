@@ -46,6 +46,7 @@ SimulationConfig::SimulationConfig(int width, int height, int numRaindrops, int 
 	animationSpeed(animationSpeed) {
 }
 
+// Getters for simulation parameters
 int SimulationConfig::getWidth() const { return width; }
 int SimulationConfig::getHeight() const { return height; }
 int SimulationConfig::getNumRaindrops() const { return numRaindrops; }
