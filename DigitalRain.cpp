@@ -23,6 +23,7 @@ DigitalRain.cpp
 #include <string>
 #include <stdexcept> // Include for exception handling
 #include <algorithm> // Include for std::for_each
+#include <array> // Include for std::array
 #include <memory> // Include for smart pointers
 
 // Constants for color codes
@@ -34,8 +35,8 @@ constexpr const char* MAGENTA = "\033[35m";
 constexpr const char* CYAN = "\033[36m";
 constexpr const char* WHITE = "\033[37m";
 
-constexpr const char* COLORS[] = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
-constexpr int NUM_COLORS = sizeof(COLORS) / sizeof(COLORS[0]);
+constexpr std::array<const char*, 7> COLORS = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
+constexpr int NUM_COLORS = COLORS.size();
 
 // Raindrop class implementation
 Raindrop::Raindrop(int x, int y, int length, const std::string& symbols, const std::vector<std::string>& colors)
@@ -100,7 +101,6 @@ std::string randomChars(int length) {
 std::string randomColor() {
     return COLORS[randomInt(0, NUM_COLORS - 1)];
 }
-
 // Function to generate raindrops
 std::vector<std::unique_ptr<Raindrop>> generateRaindrops(const SimulationConfig& config) {
     std::vector<std::unique_ptr<Raindrop>> raindrops;
@@ -141,6 +141,7 @@ void moveRaindrops(std::vector<std::unique_ptr<Raindrop>>& raindrops, const Simu
             drop->setLength(randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax())); // Assign a new random length to the raindrop
             drop->setSymbols(randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()))); // New random symbols for each raindrop
             std::vector<std::string> newColors;
+            newColors.reserve(drop->getSymbols().length());
             for (char c : drop->getSymbols()) {
                 newColors.push_back(randomColor());
             }
