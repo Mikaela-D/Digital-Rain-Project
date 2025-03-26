@@ -60,7 +60,7 @@ int randomInt(int min, int max) {
 	}
 	thread_local std::random_device rd;  // Random device for generating seed
 	thread_local std::mt19937 gen(rd()); // Mersenne Twister RNG
-	std::uniform_int_distribution<> dist(min, max); // Uniform distribution
+	std::uniform_int_distribution<> dist(min, max); //  Equal probability of being selected
 	return dist(gen); // Generate random number
 }
 
