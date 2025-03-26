@@ -63,8 +63,8 @@ public:
 	// Clear the matrix screen
 	void clear() {
 		for (int y = 0; y < height; ++y) {
-			std::fill(screen[y].begin(), screen[y].end(), ' '); // Fill empty
-			std::fill(colorScreen[y].begin(), colorScreen[y].end(), "\033[0m"); // Fill with default terminal color
+			std::fill(screen[y].begin(), screen[y].end(), ' ');
+			std::fill(colorScreen[y].begin(), colorScreen[y].end(), "\033[0m");
 		}
 	}
 
@@ -96,7 +96,7 @@ private:
 	int width; // Width of the matrix
 	int height; // Height of the matrix
 	std::vector<std::vector<char>> screen; // Characters on the matrix screen
-	std::vector<std::vector<std::string>> colorScreen; // Colours for each character on the matrix screen
+	std::vector<std::vector<std::string>> colorScreen; // Colors for each character on the matrix screen
 };
 
 // Class to hold simulation parameters
