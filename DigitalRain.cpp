@@ -26,7 +26,7 @@ DigitalRain.cpp
 #include <array>        // array
 #include <memory>       // unique_ptr, make_unique
 
-// Constants for color codes
+// Constants for color codes, evaluate at compile time
 constexpr const char* RED = "\033[31m";
 constexpr const char* GREEN = "\033[32m";
 constexpr const char* YELLOW = "\033[33m";
