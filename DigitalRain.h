@@ -8,8 +8,6 @@
 	   `---..__,,--'            ` -'. -'
 
 Mikaela Diaz
-
-DigitalRain.h
 */
 
 #ifndef DIGITALRAIN_H

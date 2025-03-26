@@ -8,8 +8,6 @@
 	   `---..__,,--'            ` -'. -'
 
 Mikaela Diaz
-
-DigitalRain.cpp
 */
 
 #include "DigitalRain.h" 
