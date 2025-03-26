@@ -14,7 +14,7 @@ DigitalRain.cpp
 
 #include "DigitalRain.h" 
 #include <iostream>     // cout, endl
-#include <vector>       // vector
+#include <vector>       // vector, emplace_back
 #include <string>       // string
 #include <cstdlib>      // rand, srand
 #include <ctime>        // time
