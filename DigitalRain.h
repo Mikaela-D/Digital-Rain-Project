@@ -1,15 +1,3 @@
-/*
-			  _,-'/-'/
-  .      __,-; ,'( '/
-   \.    `-.__`-._`:_,-._       _ , . ``
-	`:-._,------' ` _,`--` -: `_ , ` ,' :
-	   `---..__,,--'            ` -'. -'
-
-Mikaela Diaz
-
-DigitalRain.h
-*/
-
 #ifndef DIGITALRAIN_H
 #define DIGITALRAIN_H
 
