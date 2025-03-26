@@ -20,7 +20,7 @@ int main() {
 	// Create a simulation configuration with specific parameters
 	SimulationConfig config(120, 25, 10, 10, 15, 50);
 
-	// Start the rainfall simulation
+	// Start the simulation
 	simulateRainfall(config);
 
 	//runAllTests();
