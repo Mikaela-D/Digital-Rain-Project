@@ -1,15 +1,4 @@
-﻿/*
-			  _,-'/-'/
-  .      __,-; ,'( '/
-   \.    `-.__`-._`:_,-._       _ , . ``
-	`:-._,------' ` _,`--` -: `_ , ` ,' :
-	   `---..__,,--'            ` -'. -'
-
-Mikaela Diaz
-DigitalRain.cpp
-*/
-
-#include "DigitalRain.h"
+﻿#include "DigitalRain.h"
 #include <thread>
 #include <chrono>
 #include <array>
@@ -40,7 +29,10 @@ std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
 	std::vector<Raindrop> raindrops;
 	for (int i = 0; i < config.numRaindrops; ++i) {
 		auto symbols = randomChars(randomInt(3, 5));
-		std::vector<std::string> colors(symbols.size(), randomColor());
+		std::vector<std::string> colors;
+		for (char c : symbols) {
+			colors.push_back(randomColor());
+		}
 		raindrops.emplace_back(randomInt(0, config.width - 1), randomInt(0, config.height - 1),
 			randomInt(config.raindropLengthMin, config.raindropLengthMax), symbols, colors);
 	}
@@ -68,7 +60,10 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& con
 			drop.x = randomInt(0, config.width - 1);
 			drop.length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
 			drop.symbols = randomChars(randomInt(3, 5));
-			drop.colors = std::vector<std::string>(drop.symbols.size(), randomColor());
+			drop.colors.clear();
+			for (char c : drop.symbols) {
+				drop.colors.push_back(randomColor());
+			}
 		}
 	}
 }
