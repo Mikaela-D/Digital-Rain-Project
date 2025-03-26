@@ -44,9 +44,8 @@ void updateScreen(Matrix<char>& matrix, const std::vector<Raindrop<char>>& raind
 	for (const auto& drop : raindrops) {
 		for (int i = 0; i < drop.length; ++i) {
 			int y = drop.y - i;
-			if (y >= 0 && y < matrix.height) {
-				int index = i % drop.symbols.size();
-				matrix.setCell(drop.x, y, drop.symbols[index], drop.colors[index]);
+			if (y >= 0 && y < matrix.height && i < static_cast<int>(drop.symbols.size()) && i < static_cast<int>(drop.colors.size())) {
+				matrix.setCell(drop.x, y, drop.symbols[i], drop.colors[i]);
 			}
 		}
 	}
@@ -60,6 +59,7 @@ void moveRaindrops(std::vector<Raindrop<char>>& raindrops, const SimulationConfi
 			drop.x = randomInt(0, config.width - 1);
 			drop.length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
 			drop.symbols = randomChars(randomInt(3, 5));
+			drop.colors.resize(drop.symbols.size());
 			for (auto& color : drop.colors) {
 				color = randomColor();
 			}
