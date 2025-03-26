@@ -40,10 +40,8 @@ constexpr std::array<const char*, 7> COLORS = { RED, GREEN, YELLOW, BLUE, MAGENT
 constexpr int NUM_COLORS = COLORS.size(); // Number of colors available
 
 // SimulationConfig class implementation
-SimulationConfig::SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax,
-	int symbolLengthMin, int symbolLengthMax, int animationSpeed)
-	: width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin),
-	raindropLengthMax(raindropLengthMax), symbolLengthMin(symbolLengthMin), symbolLengthMax(symbolLengthMax),
+SimulationConfig::SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax, int animationSpeed)
+	: width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin), raindropLengthMax(raindropLengthMax),
 	animationSpeed(animationSpeed) {
 }
 
@@ -53,8 +51,6 @@ int SimulationConfig::getHeight() const { return height; }
 int SimulationConfig::getNumRaindrops() const { return numRaindrops; }
 int SimulationConfig::getRaindropLengthMin() const { return raindropLengthMin; }
 int SimulationConfig::getRaindropLengthMax() const { return raindropLengthMax; }
-int SimulationConfig::getSymbolLengthMin() const { return symbolLengthMin; }
-int SimulationConfig::getSymbolLengthMax() const { return symbolLengthMax; }
 int SimulationConfig::getAnimationSpeed() const { return animationSpeed; }
 
 // Generate random integer within a range
@@ -92,7 +88,7 @@ std::vector<std::unique_ptr<Raindrop<std::string, std::string>>> generateRaindro
 	std::vector<std::unique_ptr<Raindrop<std::string, std::string>>> raindrops;
 	raindrops.reserve(config.getNumRaindrops()); // Reserve space for efficiency
 	for (int i = 0; i < config.getNumRaindrops(); ++i) {
-		std::string symbols = randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax())); // Generate random symbols
+		std::string symbols = randomChars(randomInt(3, 5)); // Generate random symbols (hardcoded min and max lengths)
 		std::vector<std::string> colors;
 		colors.reserve(symbols.length()); // Reserve space for colors
 		for (char c : symbols) {
@@ -132,7 +128,7 @@ void moveRaindrops(std::vector<std::unique_ptr<Raindrop<std::string, std::string
 			drop->setY(0); // Reset Y position to top
 			drop->setX(randomInt(0, config.getWidth() - 1)); // Assign new random X position
 			drop->setLength(randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax())); // Assign a new random length to the raindrop
-			drop->setSymbols(randomChars(randomInt(config.getSymbolLengthMin(), config.getSymbolLengthMax()))); // New random symbols for each raindrop
+			drop->setSymbols(randomChars(randomInt(3, 5))); // New random symbols for each raindrop (hardcoded min and max lengths)
 			std::vector<std::string> newColors;
 			newColors.reserve(drop->getSymbols().length());
 			for (char c : drop->getSymbols()) {

@@ -103,8 +103,7 @@ private:
 class SimulationConfig {
 public:
 	// Constructor to initialise simulation parameters
-	SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax,
-		int symbolLengthMin, int symbolLengthMax, int animationSpeed);
+	SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax, int animationSpeed);
 
 	// Getters for simulation parameters
 	int getWidth() const;
@@ -112,8 +111,6 @@ public:
 	int getNumRaindrops() const;
 	int getRaindropLengthMin() const;
 	int getRaindropLengthMax() const;
-	int getSymbolLengthMin() const;
-	int getSymbolLengthMax() const;
 	int getAnimationSpeed() const;
 
 private:
@@ -122,8 +119,6 @@ private:
 	int numRaindrops; // Number of raindrops in the simulation
 	int raindropLengthMin; // Minimum length of a raindrop
 	int raindropLengthMax; // Maximum length of a raindrop
-	int symbolLengthMin; // Minimum length of symbols in a raindrop
-	int symbolLengthMax; // Maximum length of symbols in a raindrop
 	int animationSpeed; // Speed of the animation
 };
 

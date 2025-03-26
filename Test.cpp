@@ -60,7 +60,7 @@ void testMatrix() {
 // Function to test the SimulationConfig class
 void testSimulationConfig() {
 	// Create a SimulationConfig object with specific parameters
-	SimulationConfig config(120, 25, 10, 10, 15, 3, 5, 50);
+	SimulationConfig config(120, 25, 10, 10, 15, 50);
 
 	// Verify the parameters of the SimulationConfig object using assertions
 	assert(config.getWidth() == 120);
@@ -68,8 +68,6 @@ void testSimulationConfig() {
 	assert(config.getNumRaindrops() == 10);
 	assert(config.getRaindropLengthMin() == 10);
 	assert(config.getRaindropLengthMax() == 15);
-	assert(config.getSymbolLengthMin() == 3);
-	assert(config.getSymbolLengthMax() == 5);
 	assert(config.getAnimationSpeed() == 50);
 
 	std::cout << "testSimulationConfig() passed.\n";
