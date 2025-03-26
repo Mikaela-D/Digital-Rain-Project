@@ -10,10 +10,10 @@ template <typename T>
 class Raindrop {
 public:
 	int x, y, length;
-	std::basic_string<T> symbols;
+	std::vector<T> symbols;
 	std::vector<std::basic_string<T>> colors;
 
-	Raindrop(int x, int y, int length, const std::basic_string<T>& symbols, const std::vector<std::basic_string<T>>& colors)
+	Raindrop(int x, int y, int length, const std::vector<T>& symbols, const std::vector<std::basic_string<T>>& colors)
 		: x(x), y(y), length(length), symbols(symbols), colors(colors) {
 	}
 };
@@ -26,8 +26,7 @@ public:
 	std::vector<std::vector<std::basic_string<T>>> colorScreen;
 
 	Matrix(int width, int height)
-		: width(width), height(height), screen(height, std::vector<T>(width, ' ')),
-		colorScreen(height, std::vector<std::basic_string<T>>(width, "\033[0m")) {
+		: width(width), height(height), screen(height, std::vector<T>(width, ' ')), colorScreen(height, std::vector<std::basic_string<T>>(width, "\033[0m")) {
 	}
 
 	void clear() {
@@ -64,7 +63,7 @@ public:
 };
 
 int randomInt(int min, int max);
-std::string randomChars(int length);
+std::vector<char> randomChars(int length);
 std::string randomColor();
 std::vector<Raindrop<char>> generateRaindrops(const SimulationConfig& config);
 void updateScreen(Matrix<char>& matrix, const std::vector<Raindrop<char>>& raindrops);

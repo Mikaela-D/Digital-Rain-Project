@@ -1,9 +1,8 @@
 ﻿#include "DigitalRain.h"
 #include <thread>
 #include <chrono>
-#include <array>
 
-constexpr std::array<const char*, 7> COLORS = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
+constexpr const char* COLORS[] = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
 
 int randomInt(int min, int max) {
 	static std::random_device rd;
@@ -12,9 +11,9 @@ int randomInt(int min, int max) {
 	return dist(gen);
 }
 
-std::string randomChars(int length) {
+std::vector<char> randomChars(int length) {
 	const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	std::string result(length, '\0');
+	std::vector<char> result(length);
 	for (char& c : result) {
 		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)];
 	}
@@ -22,7 +21,7 @@ std::string randomChars(int length) {
 }
 
 std::string randomColor() {
-	return COLORS[randomInt(0, static_cast<int>(COLORS.size()) - 1)];
+	return COLORS[randomInt(0, sizeof(COLORS) / sizeof(COLORS[0]) - 1)];
 }
 
 std::vector<Raindrop<char>> generateRaindrops(const SimulationConfig& config) {
@@ -31,7 +30,9 @@ std::vector<Raindrop<char>> generateRaindrops(const SimulationConfig& config) {
 	for (int i = 0; i < config.numRaindrops; ++i) {
 		auto symbols = randomChars(randomInt(3, 5));
 		std::vector<std::string> colors(symbols.size());
-		std::generate(colors.begin(), colors.end(), randomColor);
+		for (auto& color : colors) {
+			color = randomColor();
+		}
 		raindrops.emplace_back(randomInt(0, config.width - 1), randomInt(0, config.height - 1),
 			randomInt(config.raindropLengthMin, config.raindropLengthMax), symbols, colors);
 	}
@@ -44,7 +45,7 @@ void updateScreen(Matrix<char>& matrix, const std::vector<Raindrop<char>>& raind
 		for (int i = 0; i < drop.length; ++i) {
 			int y = drop.y - i;
 			if (y >= 0 && y < matrix.height) {
-				int index = i % drop.symbols.length();
+				int index = i % drop.symbols.size();
 				matrix.setCell(drop.x, y, drop.symbols[index], drop.colors[index]);
 			}
 		}
@@ -59,8 +60,9 @@ void moveRaindrops(std::vector<Raindrop<char>>& raindrops, const SimulationConfi
 			drop.x = randomInt(0, config.width - 1);
 			drop.length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
 			drop.symbols = randomChars(randomInt(3, 5));
-			drop.colors.resize(drop.symbols.size());
-			std::generate(drop.colors.begin(), drop.colors.end(), randomColor);
+			for (auto& color : drop.colors) {
+				color = randomColor();
+			}
 		}
 	}
 }
