@@ -12,7 +12,8 @@ public:
 	int x, y, length;
 	std::basic_string<T> symbols;
 	std::vector<std::basic_string<T>> colors;
-	Raindrop(int x, int y, int length, std::basic_string<T> symbols, std::vector<std::basic_string<T>> colors)
+
+	Raindrop(int x, int y, int length, const std::basic_string<T>& symbols, const std::vector<std::basic_string<T>>& colors)
 		: x(x), y(y), length(length), symbols(symbols), colors(colors) {
 	}
 };
@@ -23,6 +24,7 @@ public:
 	int width, height;
 	std::vector<std::vector<T>> screen;
 	std::vector<std::vector<std::basic_string<T>>> colorScreen;
+
 	Matrix(int width, int height)
 		: width(width), height(height), screen(height, std::vector<T>(width, ' ')),
 		colorScreen(height, std::vector<std::basic_string<T>>(width, "\033[0m")) {
@@ -54,9 +56,10 @@ public:
 class SimulationConfig {
 public:
 	int width, height, numRaindrops, raindropLengthMin, raindropLengthMax, animationSpeed;
+
 	SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax, int animationSpeed)
-		: width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin), raindropLengthMax(raindropLengthMax),
-		animationSpeed(animationSpeed) {
+		: width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin),
+		raindropLengthMax(raindropLengthMax), animationSpeed(animationSpeed) {
 	}
 };
 
