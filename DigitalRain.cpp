@@ -28,13 +28,13 @@ std::vector<Raindrop<char>> generateRaindrops(const SimulationConfig& config) {
 	std::vector<Raindrop<char>> raindrops;
 	raindrops.reserve(config.numRaindrops);
 	for (int i = 0; i < config.numRaindrops; ++i) {
-		auto symbols = randomChars(randomInt(3, 5));
-		std::vector<std::string> colors(symbols.size());
+		int length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
+		auto symbols = randomChars(length);
+		std::vector<std::string> colors(length);
 		for (auto& color : colors) {
 			color = randomColor();
 		}
-		raindrops.emplace_back(randomInt(0, config.width - 1), randomInt(0, config.height - 1),
-			randomInt(config.raindropLengthMin, config.raindropLengthMax), symbols, colors);
+		raindrops.emplace_back(randomInt(0, config.width - 1), randomInt(0, config.height - 1), length, symbols, colors);
 	}
 	return raindrops;
 }
@@ -58,8 +58,8 @@ void moveRaindrops(std::vector<Raindrop<char>>& raindrops, const SimulationConfi
 			drop.y = 0;
 			drop.x = randomInt(0, config.width - 1);
 			drop.length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
-			drop.symbols = randomChars(randomInt(3, 5));
-			drop.colors.resize(drop.symbols.size());
+			drop.symbols = randomChars(drop.length);
+			drop.colors.resize(drop.length);
 			for (auto& color : drop.colors) {
 				color = randomColor();
 			}
