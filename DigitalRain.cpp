@@ -39,7 +39,7 @@ constexpr const char* WHITE = "\033[37m";
 constexpr std::array<const char*, 7> COLORS = { RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE };
 constexpr int NUM_COLORS = COLORS.size(); // Number of colors available
 
-// SimulationConfig class implementation
+// SimulationConfig class implementation constructor
 SimulationConfig::SimulationConfig(int width, int height, int numRaindrops, int raindropLengthMin, int raindropLengthMax, int animationSpeed)
 	: width(width), height(height), numRaindrops(numRaindrops), raindropLengthMin(raindropLengthMin), raindropLengthMax(raindropLengthMax),
 	animationSpeed(animationSpeed) {
@@ -128,9 +128,9 @@ void moveRaindrops(std::vector<std::unique_ptr<Raindrop<std::string, std::string
 			drop->setY(0); // Reset Y position to top
 			drop->setX(randomInt(0, config.getWidth() - 1)); // Assign new random X position
 			drop->setLength(randomInt(config.getRaindropLengthMin(), config.getRaindropLengthMax())); // Assign a new random length to the raindrop
-			drop->setSymbols(randomChars(randomInt(3, 5))); // New random symbols for each raindrop (hardcoded min and max lengths)
+			drop->setSymbols(randomChars(randomInt(3, 5))); // New random symbols for each raindrop
 			std::vector<std::string> newColors;
-			newColors.reserve(drop->getSymbols().length());
+			newColors.reserve(drop->getSymbols().length()); // Allocate enough memory for the newColors
 			for (char c : drop->getSymbols()) {
 				newColors.push_back(randomColor()); // Assign new random colours
 			}
@@ -156,7 +156,6 @@ void simulateRainfall(const SimulationConfig& config) {
 		while (true) {
 			// Update the screen with the current positions of the raindrops
 			updateScreen(matrix, raindrops);
-			// Print the updated matrix to the console
 			matrix.print();
 			// Move the raindrops downwards
 			moveRaindrops(raindrops, config);
