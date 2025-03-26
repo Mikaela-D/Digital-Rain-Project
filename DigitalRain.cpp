@@ -25,8 +25,8 @@ std::string randomColor() {
 	return COLORS[randomInt(0, static_cast<int>(COLORS.size()) - 1)]; // Proper type conversion
 }
 
-std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
-	std::vector<Raindrop> raindrops;
+std::vector<Raindrop<char>> generateRaindrops(const SimulationConfig& config) {
+	std::vector<Raindrop<char>> raindrops;
 	for (int i = 0; i < config.numRaindrops; ++i) {
 		auto symbols = randomChars(randomInt(3, 5));
 		std::vector<std::string> colors;
@@ -39,7 +39,7 @@ std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
 	return raindrops;
 }
 
-void updateScreen(Matrix& matrix, const std::vector<Raindrop>& raindrops) {
+void updateScreen(Matrix<char>& matrix, const std::vector<Raindrop<char>>& raindrops) {
 	matrix.clear();
 	for (const auto& drop : raindrops) {
 		for (int i = 0; i < drop.length; ++i) {
@@ -52,7 +52,7 @@ void updateScreen(Matrix& matrix, const std::vector<Raindrop>& raindrops) {
 	}
 }
 
-void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config) {
+void moveRaindrops(std::vector<Raindrop<char>>& raindrops, const SimulationConfig& config) {
 	for (auto& drop : raindrops) {
 		drop.y++;
 		if (drop.y - drop.length >= config.height) {
@@ -70,7 +70,7 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& con
 
 void simulateRainfall(const SimulationConfig& config) {
 	auto raindrops = generateRaindrops(config);
-	Matrix matrix(config.width, config.height);
+	Matrix<char> matrix(config.width, config.height);
 
 	std::cout << "\033[?25l";
 	while (true) {
