@@ -6,6 +6,42 @@
 
 constexpr const char* COLORS[] = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
 
+Raindrop::Raindrop(int startX, int startY, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
+	: x(startX), y(startY), length(dropLength), symbols(dropSymbols), colors(dropColors) {
+}
+
+Screen::Screen(int screenWidth, int screenHeight)
+	: width(screenWidth), height(screenHeight),
+	screen(screenHeight, std::vector<char>(screenWidth, ' ')),
+	colorScreen(screenHeight, std::vector<std::string>(screenWidth, "\033[0m")) {
+}
+
+void Screen::clear() {
+	for (auto& row : screen) {
+		std::fill(row.begin(), row.end(), ' ');
+	}
+	for (auto& row : colorScreen) {
+		std::fill(row.begin(), row.end(), "\033[0m");
+	}
+}
+
+void Screen::setCell(int x, int y, char symbol, const std::string& color) {
+	if (x >= 0 && x < width && y >= 0 && y < height) {
+		screen[y][x] = symbol;
+		colorScreen[y][x] = color;
+	}
+}
+
+void Screen::print() const {
+	for (int y = 0; y < height; ++y) {
+		for (int x = 0; x < width; ++x) {
+			std::cout << colorScreen[y][x] << screen[y][x];
+		}
+		std::cout << "\033[0m" << std::endl;
+	}
+	std::cout << std::string(width, '_') << std::endl;
+}
+
 int randomInt(int min, int max) {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
