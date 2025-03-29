@@ -1,5 +1,3 @@
-// main.cpp
-
 #include "DigitalRain.h"
 #include "Test.h"
 
