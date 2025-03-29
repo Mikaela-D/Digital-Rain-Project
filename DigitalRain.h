@@ -8,27 +8,25 @@
 #include <string>
 #include <random>
 
-template <typename T>
 class Raindrop {
 public:
 	int x, y, length;
-	std::vector<T> symbols;
+	std::vector<char> symbols;
 	std::vector<std::string> colors;
 
-	Raindrop(int x, int y, int length, const std::vector<T>& symbols, const std::vector<std::string>& colors)
+	Raindrop(int x, int y, int length, const std::vector<char>& symbols, const std::vector<std::string>& colors)
 		: x(x), y(y), length(length), symbols(symbols), colors(colors) {
 	}
 };
 
-template <typename T>
-class Matrix {
+class Screen {
 public:
 	int width, height;
-	std::vector<std::vector<T>> screen;
+	std::vector<std::vector<char>> screen;
 	std::vector<std::vector<std::string>> colorScreen;
 
-	Matrix(int width, int height)
-		: width(width), height(height), screen(height, std::vector<T>(width, ' ')), colorScreen(height, std::vector<std::string>(width, "\033[0m")) {
+	Screen(int width, int height)
+		: width(width), height(height), screen(height, std::vector<char>(width, ' ')), colorScreen(height, std::vector<std::string>(width, "\033[0m")) {
 	}
 
 	void clear() {
@@ -36,7 +34,7 @@ public:
 		for (auto& row : colorScreen) std::fill(row.begin(), row.end(), "\033[0m");
 	}
 
-	void setCell(int x, int y, T symbol, const std::string& color) {
+	void setCell(int x, int y, char symbol, const std::string& color) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			screen[y][x] = symbol;
 			colorScreen[y][x] = color;
@@ -67,9 +65,9 @@ public:
 int randomInt(int min, int max);
 std::vector<char> randomChars(int length);
 std::string randomColor();
-std::vector<Raindrop<char>> generateRaindrops(const SimulationConfig& config);
-void updateScreen(Matrix<char>& matrix, const std::vector<Raindrop<char>>& raindrops);
-void moveRaindrops(std::vector<Raindrop<char>>& raindrops, const SimulationConfig& config);
+std::vector<Raindrop> generateRaindrops(const SimulationConfig& config);
+void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops);
+void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config);
 void simulateRainfall(const SimulationConfig& config);
 
 #endif
