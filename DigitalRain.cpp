@@ -1,9 +1,9 @@
 ﻿// DigitalRain.cpp
 
 #include "DigitalRain.h"
-#include <thread>
-#include <chrono>
-#include <algorithm> // Include this for std::fill
+#include <thread>       // std::this_thread::sleep_for
+#include <chrono>       // std::chrono::milliseconds
+#include <algorithm>    // std::fill
 
 constexpr const char* COLORS[] = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
 

@@ -3,10 +3,10 @@
 #ifndef DIGITALRAIN_H
 #define DIGITALRAIN_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <random>
+#include <iostream> // std::cout, std::endl
+#include <vector>   // std::vector
+#include <string>   // std::string
+#include <random>   // std::random_device, std::mt19937, std::uniform_int_distribution
 
 class Raindrop {
 public:
