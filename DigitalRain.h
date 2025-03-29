@@ -26,7 +26,8 @@ public:
 	std::vector<std::vector<std::string>> colorScreen;
 
 	Screen(int width, int height)
-		: width(width), height(height), screen(height, std::vector<char>(width, ' ')), colorScreen(height, std::vector<std::string>(width, "\033[0m")) {
+		: width(width), height(height), screen(height, std::vector<char>(width, ' ')),
+		colorScreen(height, std::vector<std::string>(width, "\033[0m")) {
 	}
 
 	void clear() {

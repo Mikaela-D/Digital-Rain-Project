@@ -17,13 +17,13 @@ std::vector<char> randomChars(int length) {
 	const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	std::vector<char> result(length);
 	for (char& c : result) {
-		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)];
+		c = chars[randomInt(0, chars.size() - 1)];
 	}
 	return result;
 }
 
 std::string randomColor() {
-	return COLORS[randomInt(0, sizeof(COLORS) / sizeof(COLORS[0]) - 1)];
+	return COLORS[randomInt(0, std::size(COLORS) - 1)];
 }
 
 std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
@@ -46,7 +46,7 @@ void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 	for (const auto& drop : raindrops) {
 		for (int i = 0; i < drop.length; ++i) {
 			int y = drop.y - i;
-			if (y >= 0 && y < screen.height && i < static_cast<int>(drop.symbols.size()) && i < static_cast<int>(drop.colors.size())) {
+			if (y >= 0 && y < screen.height) {
 				screen.setCell(drop.x, y, drop.symbols[i], drop.colors[i]);
 			}
 		}
