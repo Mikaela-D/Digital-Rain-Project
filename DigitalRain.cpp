@@ -1,4 +1,6 @@
-﻿#include "DigitalRain.h"
+﻿// DigitalRain.cpp
+
+#include "DigitalRain.h"
 #include <thread>
 #include <chrono>
 
@@ -10,12 +12,12 @@ Raindrop::Raindrop(int startX, int startY, int dropLength, const std::vector<cha
 }
 
 Screen::Screen(int screenWidth, int screenHeight)
-	: width(screenWidth), height(screenHeight),
+	: screenWidth(screenWidth), screenHeight(screenHeight),
 	screen(screenHeight, std::vector<char>(screenWidth, ' ')),
 	colorScreen(screenHeight, std::vector<std::string>(screenWidth, "\033[0m")) {
 }
 
-void Screen::clear() {
+void Screen::clearScreen() {
 	for (auto& row : screen) {
 		std::fill(row.begin(), row.end(), ' ');
 	}
@@ -24,21 +26,21 @@ void Screen::clear() {
 	}
 }
 
-void Screen::setCell(int x, int y, char symbol, const std::string& color) {
-	if (x >= 0 && x < width && y >= 0 && y < height) {
+void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
+	if (x >= 0 && x < screenWidth && y >= 0 && y < screenHeight) {
 		screen[y][x] = symbol;
 		colorScreen[y][x] = color;
 	}
 }
 
 void Screen::print() const {
-	for (int y = 0; y < height; ++y) {
-		for (int x = 0; x < width; ++x) {
+	for (int y = 0; y < screenHeight; ++y) {
+		for (int x = 0; x < screenWidth; ++x) {
 			std::cout << colorScreen[y][x] << screen[y][x];
 		}
 		std::cout << "\033[0m" << std::endl;
 	}
-	std::cout << std::string(width, '_') << std::endl;
+	std::cout << std::string(screenWidth, '_') << std::endl;
 }
 
 // Utility Functions
@@ -63,40 +65,40 @@ std::string randomColor() {
 }
 
 // Main Functions
-std::vector<Raindrop> generateRaindrops(int width, int height, int numRaindrops, int lengthMin, int lengthMax) {
+std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength) {
 	std::vector<Raindrop> raindrops;
 	raindrops.reserve(numRaindrops);
 	for (int i = 0; i < numRaindrops; ++i) {
-		int length = randomInt(lengthMin, lengthMax);
+		int length = randomInt(minLength, maxLength);
 		auto symbols = randomChars(length);
 		std::vector<std::string> colors(length);
 		for (auto& color : colors) {
 			color = randomColor();
 		}
-		raindrops.emplace_back(randomInt(0, width - 1), randomInt(0, height - 1), length, symbols, colors);
+		raindrops.emplace_back(randomInt(0, screenWidth - 1), randomInt(0, screenHeight - 1), length, symbols, colors);
 	}
 	return raindrops;
 }
 
 void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
-	screen.clear();
+	screen.clearScreen();
 	for (const auto& drop : raindrops) {
 		for (int i = 0; i < drop.length; ++i) {
 			int y = drop.y - i;
-			if (y >= 0 && y < screen.height) {
-				screen.setCell(drop.x, y, drop.symbols[i], drop.colors[i]);
+			if (y >= 0 && y < screen.screenHeight) {
+				screen.drawSymbol(drop.x, y, drop.symbols[i], drop.colors[i]);
 			}
 		}
 	}
 }
 
-void moveRaindrops(std::vector<Raindrop>& raindrops, int width, int height, int lengthMin, int lengthMax) {
+void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
 	for (auto& drop : raindrops) {
 		drop.y++;
-		if (drop.y - drop.length >= height) {
+		if (drop.y - drop.length >= screenHeight) {
 			drop.y = 0;
-			drop.x = randomInt(0, width - 1);
-			drop.length = randomInt(lengthMin, lengthMax);
+			drop.x = randomInt(0, screenWidth - 1);
+			drop.length = randomInt(minLength, maxLength);
 			drop.symbols = randomChars(drop.length);
 			drop.colors.resize(drop.length);
 			for (auto& color : drop.colors) {
@@ -106,15 +108,15 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, int width, int height, int 
 	}
 }
 
-void simulateRainfall(int width, int height, int numRaindrops, int lengthMin, int lengthMax, int animationSpeed) {
-	auto raindrops = generateRaindrops(width, height, numRaindrops, lengthMin, lengthMax);
-	Screen screen(width, height);
+void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength, int animationSpeed) {
+	auto raindrops = generateRaindrops(screenWidth, screenHeight, numRaindrops, minLength, maxLength);
+	Screen screen(screenWidth, screenHeight);
 
 	std::cout << "\033[?25l";  // Hide cursor
 	while (true) {
 		updateScreen(screen, raindrops);
 		screen.print();
-		moveRaindrops(raindrops, width, height, lengthMin, lengthMax);
+		moveRaindrops(raindrops, screenWidth, screenHeight, minLength, maxLength);
 		std::this_thread::sleep_for(std::chrono::milliseconds(animationSpeed));
 		std::cout << "\033[H";  // Move cursor to home position
 	}
