@@ -16,7 +16,7 @@ public:
 	std::vector<char> symbols;
 	std::vector<std::string> colors;
 
-	Raindrop(int startX, int startY, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors);
+	Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors);
 };
 
 class Screen {

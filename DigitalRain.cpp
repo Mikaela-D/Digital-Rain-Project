@@ -7,8 +7,8 @@
 constexpr const char* COLORS[] = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
 
 // Class Definitions
-Raindrop::Raindrop(int startX, int startY, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
-	: x(startX), y(startY), length(dropLength), symbols(dropSymbols), colors(dropColors) {
+Raindrop::Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
+	: x(xPosition), y(yPosition), length(dropLength), symbols(dropSymbols), colors(dropColors) {
 }
 
 Screen::Screen(int screenWidth, int screenHeight)
