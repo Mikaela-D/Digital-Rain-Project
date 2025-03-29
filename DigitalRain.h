@@ -1,5 +1,3 @@
-// DigitalRain.h
-
 #ifndef DIGITALRAIN_H
 #define DIGITALRAIN_H
 
@@ -13,9 +11,9 @@ class Raindrop {
 public:
 	int x, y, length;
 	std::vector<T> symbols;
-	std::vector<std::basic_string<T>> colors;
+	std::vector<std::string> colors;
 
-	Raindrop(int x, int y, int length, const std::vector<T>& symbols, const std::vector<std::basic_string<T>>& colors)
+	Raindrop(int x, int y, int length, const std::vector<T>& symbols, const std::vector<std::string>& colors)
 		: x(x), y(y), length(length), symbols(symbols), colors(colors) {
 	}
 };
@@ -25,10 +23,10 @@ class Matrix {
 public:
 	int width, height;
 	std::vector<std::vector<T>> screen;
-	std::vector<std::vector<std::basic_string<T>>> colorScreen;
+	std::vector<std::vector<std::string>> colorScreen;
 
 	Matrix(int width, int height)
-		: width(width), height(height), screen(height, std::vector<T>(width, ' ')), colorScreen(height, std::vector<std::basic_string<T>>(width, "\033[0m")) {
+		: width(width), height(height), screen(height, std::vector<T>(width, ' ')), colorScreen(height, std::vector<std::string>(width, "\033[0m")) {
 	}
 
 	void clear() {
@@ -36,7 +34,7 @@ public:
 		for (auto& row : colorScreen) std::fill(row.begin(), row.end(), "\033[0m");
 	}
 
-	void setCell(int x, int y, T symbol, const std::basic_string<T>& color) {
+	void setCell(int x, int y, T symbol, const std::string& color) {
 		if (x >= 0 && x < width && y >= 0 && y < height) {
 			screen[y][x] = symbol;
 			colorScreen[y][x] = color;
