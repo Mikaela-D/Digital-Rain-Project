@@ -5,7 +5,15 @@
 #include <chrono>       // std::chrono::milliseconds
 #include <algorithm>    // std::fill
 
-constexpr const char* COLORS[] = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
+constexpr const char* COLORS[] = {
+	"\033[31m", // Red
+	"\033[32m", // Green
+	"\033[33m", // Yellow
+	"\033[34m", // Blue
+	"\033[35m", // Magenta
+	"\033[36m", // Cyan
+	"\033[37m"  // White
+};
 
 // Class Definitions
 Raindrop::Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
