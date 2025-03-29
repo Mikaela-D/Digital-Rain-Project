@@ -1,11 +1,10 @@
-﻿// DigitalRain.cpp
-
-#include "DigitalRain.h"
+﻿#include "DigitalRain.h"
 #include <thread>
 #include <chrono>
 
 constexpr const char* COLORS[] = { "\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m", "\033[36m", "\033[37m" };
 
+// Class Definitions
 Raindrop::Raindrop(int startX, int startY, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
 	: x(startX), y(startY), length(dropLength), symbols(dropSymbols), colors(dropColors) {
 }
@@ -42,6 +41,7 @@ void Screen::print() const {
 	std::cout << std::string(width, '_') << std::endl;
 }
 
+// Utility Functions
 int randomInt(int min, int max) {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
@@ -62,6 +62,7 @@ std::string randomColor() {
 	return COLORS[randomInt(0, std::size(COLORS) - 1)];
 }
 
+// Main Functions
 std::vector<Raindrop> generateRaindrops(int width, int height, int numRaindrops, int lengthMin, int lengthMax) {
 	std::vector<Raindrop> raindrops;
 	raindrops.reserve(numRaindrops);
