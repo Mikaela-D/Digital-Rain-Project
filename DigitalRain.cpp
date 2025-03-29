@@ -53,13 +53,13 @@ std::vector<char> randomChars(int length) {
 	const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	std::vector<char> result(length);
 	for (char& c : result) {
-		c = chars[randomInt(0, chars.size() - 1)];
+		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)]; // Fixed warning C4267
 	}
 	return result;
 }
 
 std::string randomColor() {
-	return COLORS[randomInt(0, std::size(COLORS) - 1)];
+	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)]; // Fixed warning C4267
 }
 
 // Main Functions
