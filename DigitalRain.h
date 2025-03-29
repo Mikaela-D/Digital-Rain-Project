@@ -29,7 +29,8 @@ public:
 	std::vector<std::vector<std::string>> colorScreen;
 
 	Screen(int screenWidth, int screenHeight)
-		: width(screenWidth), height(screenHeight), screen(screenHeight, std::vector<char>(screenWidth, ' ')),
+		: width(screenWidth), height(screenHeight),
+		screen(screenHeight, std::vector<char>(screenWidth, ' ')),
 		colorScreen(screenHeight, std::vector<std::string>(screenWidth, "\033[0m")) {
 	}
 
@@ -60,27 +61,12 @@ public:
 	}
 };
 
-class SimulationConfig {
-public:
-	int width;
-	int height;
-	int numRaindrops;
-	int raindropLengthMin;
-	int raindropLengthMax;
-	int animationSpeed;
-
-	SimulationConfig(int screenWidth, int screenHeight, int numDrops, int lengthMin, int lengthMax, int speed)
-		: width(screenWidth), height(screenHeight), numRaindrops(numDrops), raindropLengthMin(lengthMin),
-		raindropLengthMax(lengthMax), animationSpeed(speed) {
-	}
-};
-
 int randomInt(int min, int max);
 std::vector<char> randomChars(int length);
 std::string randomColor();
-std::vector<Raindrop> generateRaindrops(const SimulationConfig& config);
+std::vector<Raindrop> generateRaindrops(int width, int height, int numRaindrops, int lengthMin, int lengthMax);
 void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops);
-void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config);
-void simulateRainfall(const SimulationConfig& config);
+void moveRaindrops(std::vector<Raindrop>& raindrops, int width, int height, int lengthMin, int lengthMax);
+void simulateRainfall(int width, int height, int numRaindrops, int lengthMin, int lengthMax, int animationSpeed);
 
 #endif // DIGITALRAIN_H

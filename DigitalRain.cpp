@@ -26,17 +26,17 @@ std::string randomColor() {
 	return COLORS[randomInt(0, std::size(COLORS) - 1)];
 }
 
-std::vector<Raindrop> generateRaindrops(const SimulationConfig& config) {
+std::vector<Raindrop> generateRaindrops(int width, int height, int numRaindrops, int lengthMin, int lengthMax) {
 	std::vector<Raindrop> raindrops;
-	raindrops.reserve(config.numRaindrops);
-	for (int i = 0; i < config.numRaindrops; ++i) {
-		int length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
+	raindrops.reserve(numRaindrops);
+	for (int i = 0; i < numRaindrops; ++i) {
+		int length = randomInt(lengthMin, lengthMax);
 		auto symbols = randomChars(length);
 		std::vector<std::string> colors(length);
 		for (auto& color : colors) {
 			color = randomColor();
 		}
-		raindrops.emplace_back(randomInt(0, config.width - 1), randomInt(0, config.height - 1), length, symbols, colors);
+		raindrops.emplace_back(randomInt(0, width - 1), randomInt(0, height - 1), length, symbols, colors);
 	}
 	return raindrops;
 }
@@ -53,13 +53,13 @@ void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 	}
 }
 
-void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& config) {
+void moveRaindrops(std::vector<Raindrop>& raindrops, int width, int height, int lengthMin, int lengthMax) {
 	for (auto& drop : raindrops) {
 		drop.y++;
-		if (drop.y - drop.length >= config.height) {
+		if (drop.y - drop.length >= height) {
 			drop.y = 0;
-			drop.x = randomInt(0, config.width - 1);
-			drop.length = randomInt(config.raindropLengthMin, config.raindropLengthMax);
+			drop.x = randomInt(0, width - 1);
+			drop.length = randomInt(lengthMin, lengthMax);
 			drop.symbols = randomChars(drop.length);
 			drop.colors.resize(drop.length);
 			for (auto& color : drop.colors) {
@@ -69,16 +69,16 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, const SimulationConfig& con
 	}
 }
 
-void simulateRainfall(const SimulationConfig& config) {
-	auto raindrops = generateRaindrops(config);
-	Screen screen(config.width, config.height);
+void simulateRainfall(int width, int height, int numRaindrops, int lengthMin, int lengthMax, int animationSpeed) {
+	auto raindrops = generateRaindrops(width, height, numRaindrops, lengthMin, lengthMax);
+	Screen screen(width, height);
 
 	std::cout << "\033[?25l";  // Hide cursor
 	while (true) {
 		updateScreen(screen, raindrops);
 		screen.print();
-		moveRaindrops(raindrops, config);
-		std::this_thread::sleep_for(std::chrono::milliseconds(config.animationSpeed));
+		moveRaindrops(raindrops, width, height, lengthMin, lengthMax);
+		std::this_thread::sleep_for(std::chrono::milliseconds(animationSpeed));
 		std::cout << "\033[H";  // Move cursor to home position
 	}
 	std::cout << "\033[?25h";  // Show cursor
