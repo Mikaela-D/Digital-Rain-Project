@@ -7,7 +7,7 @@ categories: demo
 
 For my **C++ Programming Module**, I developed a **Digital Rain** project using **modern C++**.
 
-<img src="https://raw.githubusercontent.com/Mikaela-D/Digital-Rain-Project/github-pages/assets/DigitalRain.gif" width="400" height="auto">
+<img src="https://raw.githubusercontent.com/Mikaela-D/Digital-Rain-Project/github-pages/assets/DigitalRainAnimation.gif" width="600" height="auto">
 
 ## Introduction
 
