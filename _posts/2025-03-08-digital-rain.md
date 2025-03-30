@@ -17,6 +17,7 @@ When I started this project, I wanted to recreate the digital rain effect using 
 Also, I used ANSI escape codes for colour and cursor control, which made the rainfall effect more visually appealing by making the rainfall colourful and hiding or showing the cursor. 
 
 So, what my project does is it simulates the iconic falling code effect seen in movies like The Matrix. It randomly generates characters (letters and numbers) that fall from the top to the bottom of the screen, with each raindrop having different colours and lengths. The animation is customisable in terms of screen size, number of raindrops, and speed.
+
 ---
 
 ## Design and Test
