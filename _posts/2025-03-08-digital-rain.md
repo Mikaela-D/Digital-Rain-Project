@@ -29,6 +29,16 @@ For this project, I designed the following features:
 5. The screen will be updated in each iteration to display falling raindrops without flickering.
 6. A function to test the simulation works.
 
+1. Random Characters
+```cpp
+#include <iostream>
+#include "DigitalRain.h"
+
+int main() {
+    return 0;
+}
+```
+
 ---
 
 ## Algorithm
@@ -39,11 +49,6 @@ The rain effect is implemented using **randomised characters** and **falling mov
 #include "DigitalRain.h"
 
 int main() {
-    int width = 120;
-    int height = 25;
-    int numRaindrops = 10;
-
-    simulateRainfall(width, height, numRaindrops);
     return 0;
 }
 ```
@@ -71,12 +76,12 @@ This project explores various modern C++ techniques:
 ## References
 These are the resources I used while working on the project:
 
-- Online resource on Matrix Rain algorithms: https://en.wikipedia.org/wiki/Matrix_digital_rain
-- Matrix Digital Rain code example: https://github.com/Kevger/MatrixDigitalRain
-- Digital Rain Project blog: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html
-- Neo Matrix Digital Rain code: https://github.com/st3w/neo
-- ANSI colour escape sequences: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
-- How to print coloured text: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/
-- Random number generation: https://www.digitalocean.com/community/tutorials/random-number-generator-c-plus-plus
+[1] Wikipedia, " Matrix Rain Algorithms", [Online]. Available: https://en.wikipedia.org/wiki/Matrix_digital_rain
+[2] GitHub, "Matrix Digital Rain", [Online]. Available: https://github.com/Kevger/MatrixDigitalRain
+[3] GitHub, "Digital Rain Project in C++", [Online]. Available: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html
+[4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: https://github.com/st3w/neo
+[5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+[6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/
+[7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/
 
 ---
