@@ -196,14 +196,32 @@ void testSimulateRainfall() {
 ```
 
 ## Algorithm
-The rain effect is implemented using **randomised characters** and **falling movement simulation**.
+
+To create the algorithm to simulate the digital rain, I decided I wanted to have random characters and random colours for each raindrop. Also, random lengths for each raindrop. I already explained how I achieved those effects in the Design and Test, so here I will explain the main algorithm part for the simulateRainfall function. 
+
+It first generates a list of raindrops with random properties (position, length, symbols, and colors) using generateRaindrops.  
+Then, a Screen object is created to represent the display area with the specified width and height.  
+I hide the terminal cursor to avoid visual distraction during the animation.  
+In the while loop, the updateScreen function updates the screen with the current raindrop positions and symbols, and the screen is printed, showing the updated raindrops.  
+The moveRaindrops function moves the raindrops down the screen. If they go off the bottom, they restart at the top with new random properties.  
+The animation pauses for a short period (controlled using the animationSpeed variable) to control the speed of the rain effect.  
+After printing, the cursor is moved back to the top-left corner to avoid the animation from stacking up.  
+When the animation ends, the cursor is made visible again.
 
 ```cpp
-#include <iostream>
-#include "DigitalRain.h"
+void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength, int animationSpeed) {
+	std::vector<Raindrop> raindrops = generateRaindrops(screenWidth, screenHeight, numRaindrops, minLength, maxLength);
+	Screen screen(screenWidth, screenHeight);
 
-int main() {
-    return 0;
+	std::cout << "\033[?25l";  // Hide cursor
+	while (true) {
+		updateScreen(screen, raindrops);
+		screen.print();
+		moveRaindrops(raindrops, screenWidth, screenHeight, minLength, maxLength);
+		std::this_thread::sleep_for(std::chrono::milliseconds(animationSpeed));
+		std::cout << "\033[H";  // Move cursor to home position
+	}
+	std::cout << "\033[?25h";  // Show cursor
 }
 ```
 
@@ -230,12 +248,11 @@ This project explores various modern C++ techniques:
 ## References
 These are the resources I used while working on the project:
 
-[1] Wikipedia, " Matrix Rain Algorithms", [Online]. Available: https://en.wikipedia.org/wiki/Matrix_digital_rain
-[2] GitHub, "Matrix Digital Rain", [Online]. Available: https://github.com/Kevger/MatrixDigitalRain
-[3] GitHub, "Digital Rain Project in C++", [Online]. Available: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html
-[4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: https://github.com/st3w/neo
-[5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
-[6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/
-[7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/
+[1] Wikipedia, " Matrix Rain Algorithms", [Online]. Available: https://en.wikipedia.org/wiki/Matrix_digital_rain  
+[2] GitHub, "Matrix Digital Rain", [Online]. Available: https://github.com/Kevger/MatrixDigitalRain  
+[3] GitHub, "Digital Rain Project in C++", [Online]. Available: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html  
+[4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: https://github.com/st3w/neo  
+[5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences  
+[6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/  
+[7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/  
 [8] ChatGPT. (GPT-4). Open AI. [Online]. Available: https://chatgpt.com/
----
