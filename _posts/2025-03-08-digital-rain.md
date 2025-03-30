@@ -22,9 +22,12 @@ Also, I used ANSI escape codes for colour and cursor control, which made the rai
 
 For this project, I designed the following features:
 
-1. Each character inside a raindrop will have a randomly assigned color.
-2. Characters inside the raindrops will be randomly selected from uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).
+1. Characters inside the raindrops will be randomly selected from uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).
+2. Each character inside a raindrop will have a randomly assigned colour.
 3. Raindrops will fall continuously and disappear gradually when hitting the 'ground'.
+4. The simulation will allow customisation of screen size, number of raindrops, raindrop length, and animation speed.
+5. The screen will be updated in each iteration to display falling raindrops without flickering.
+6. A function to test the simulation works.
 
 ---
 
