@@ -29,7 +29,7 @@ For this project, I designed the following features:
 5. The screen will be updated in each iteration to display falling raindrops without flickering.
 6. A function to test the simulation works.
 
-1. Random Characters
+### 1. Random Characters
 To generate random characters, I reused a function called randomInt that  generates a random integer within a given range between a minimum and a maximum number.
 I learned how to make this function using [7].
 
@@ -60,6 +60,18 @@ std::vector<char> randomChars(int length) {
 		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)];
 	}
 	return result;
+}
+```
+
+### 2. Randomly Assigned Colour
+
+The randomColor function selects a random colour from the COLORS array and assigns it to a character.  
+It works by generating a random index within the valid range of the COLORS array.  
+Then, COLORS[...] retrieves the colour at the generated index and returns the selected colour as a string.
+
+```cpp
+std::string randomColor() {
+	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)];
 }
 ```
 
