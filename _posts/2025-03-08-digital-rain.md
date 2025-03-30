@@ -151,6 +151,8 @@ void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 ```
 
 Lastly, I use the drawSymbol function to place the character and its colour on the screen.
+The if statement checks if the given coordinates (x, y) are within the screen's bounds to avoid accessing out-of-bound elements.
+If the position is valid, it updates the corresponding screen array with the symbol and the colorScreen array with the color.
 
 ```cpp
 void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
