@@ -165,8 +165,8 @@ void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
 ### Testing Function
 
 I added a simple testing function testSimulateRainfall to test that the simulateRainfall function works correctly.  
-In the test, I call simulateRainfall with specific parameters that I set in the testSimulateRainfall function.  
-I make the test function work by commenting out the simulateRainfall function in main.pp and adding testSimulateRainfall instead.
+In the testSimulateRainfall function, I call simulateRainfall with specific parameters that I set.  
+I make the test function work by commenting out the simulateRainfall function in main.cpp and adding testSimulateRainfall instead.
 
 Test.h File
 ```cpp
