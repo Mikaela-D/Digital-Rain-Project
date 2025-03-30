@@ -99,6 +99,22 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screen
 }
 ```
 
+### 4. Customisation of screen size, number of raindrops, raindrop length, and animation speed
+
+I allow passing these values to simulateRainfall in its declaration.
+
+```cpp
+void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength, int animationSpeed);
+```
+
+This setup creates a 120x25 screen, with 15 raindrops, each having a random length between 10 and 15 characters, and an animation speed of 50 milliseconds per frame.
+
+```cpp
+int main() {
+	simulateRainfall(120, 25, 15, 10, 15, 50);
+	return 0;
+}
+```
 
 ## Algorithm
 The rain effect is implemented using **randomised characters** and **falling movement simulation**.
