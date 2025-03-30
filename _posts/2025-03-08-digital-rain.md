@@ -74,6 +74,31 @@ std::string randomColor() {
 	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)];
 }
 ```
+### 3. Raindrops fall continuously and disappear gradually when hitting the 'ground'
+
+I move the raindrops down by incrementing their y value using drop.y++.  
+I use an if statement to check if the raindrop has gone past the bottom of the screen.
+If the if statement is true, I reset the raindrop to the top and assign a new random x position to make it fall from a new location.
+I randomise the length of the raindrop, generate new random characters, and assign random colours to each character in the raindrop using the for loop.
+
+```cpp
+void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
+	for (Raindrop& drop : raindrops) {
+		drop.y++;
+		if (drop.y - drop.length >= screenHeight) {
+			drop.y = 0;
+			drop.x = randomInt(0, screenWidth - 1);
+			drop.length = randomInt(minLength, maxLength);
+			drop.symbols = randomChars(drop.length);
+			drop.colors.resize(drop.length);
+			for (std::string& color : drop.colors) {
+				color = randomColor();
+			}
+		}
+	}
+}
+```
+
 
 ## Algorithm
 The rain effect is implemented using **randomised characters** and **falling movement simulation**.
