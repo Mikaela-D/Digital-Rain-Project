@@ -5,8 +5,9 @@ tags: cpp coding project
 categories: demo
 ---
 
-# Digital Rain Project
 For my **C++ Programming Module**, I developed a **Digital Rain** project using **modern C++**.
+
+<img src="https://raw.githubusercontent.com/Mikaela-D/Digital-Rain-Project/github-pages/assets/DigitalRain.gif" width="946" height="440">
 
 ## Introduction
 
