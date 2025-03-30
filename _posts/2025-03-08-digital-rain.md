@@ -11,9 +11,9 @@ For my C++ Programming Module, I developed a Digital Rain project using modern C
 
 ## Introduction
 
-People refer to cascading computer code as Digital Rain, which appeared on the Matrix movie screens. Digital Rain has been used in numerous computer and video games and films since it was introduced and popularised by the now world-renowned "The Matrix" movie produced by Simon Whiteley and his wife. Digital Rain is a cascade of dropping lines of randomly combined characters simulating rain. 
+Digital Rain is the visual effect of vertically falling computer code [1], which appeared in the Matrix movies. Digital Rain has been used in numerous computer and video games and films since it was introduced and popularised by the now world-renowned "The Matrix" movie produced by Simon Whiteley and his wife. Digital Rain is a cascade of dropping lines of randomly combined characters simulating rain. 
 
-When I started this project, I wanted to recreate the digital rain effect using modern C++. I explored methods to store arrays of random characters in vectors, which allowed me to efficiently process and print them as single strings. This approach optimises both space and time, significantly improving the efficiency of the rain effect generation.  
+When I started this project, I wanted to recreate the digital rain effect using modern C++. I explored methods to store arrays of random characters in vectors, which allowed me to efficiently process and print them as single strings. 
 Also, I used ANSI escape codes for colour and cursor control, which made the rainfall effect more visually appealing by making the rainfall colourful and hiding or showing the cursor. 
 
 ---
@@ -25,12 +25,6 @@ For this project, I designed the following features:
 1. Each character inside a raindrop will have a randomly assigned color.
 2. Characters inside the raindrops will be randomly selected from uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).
 3. Raindrops will fall continuously and disappear gradually when hitting the 'ground'.
-
-
-### Key Features:
-**Customisable rain properties (speed, density, colour, symbols)**  
-**Efficient use of the C++ Standard Library**  
-**Multi-threaded rendering for smooth animation**  
 
 ---
 
