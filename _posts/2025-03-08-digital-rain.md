@@ -51,7 +51,6 @@ It defines a string 'chars' containing uppercase and lowercase letters (A-Z, a-z
 A vector 'result' stores the random characters.  
 A loop assigns each character in the vector a random character 'chars' by calling the randomInt function to get a random index.
 Then, after filling the vector, the function returns the vector with random characters.
----
 
 ```cpp
 std::vector<char> randomChars(int length) {
