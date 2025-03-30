@@ -230,9 +230,9 @@ void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int m
 ## Problem Solving
 Some challenges I faced during development:
 
-- Efficiently rendering characters in the terminal.
-- Generating random sequences that resemble falling rain.
-- Balancing performance while maintaining smooth animation.
+The biggest challenges I faced during development were the raindrop movements and the random selection for the characters, colours, and length.  
+The main challenge with raindrop movement was making sure they fall smoothly from top to bottom and reset when they hit the bottom. I had to carefully update their position and redraw them at the new location while clearing the screen in between to keep the animation fluid.  
+The challenge with randomising raindrop properties (characters, colours, and length) was making sure each raindrop was unique. I used a random number generator to assign different characters and colours to each raindrop.
 
 ---
 
