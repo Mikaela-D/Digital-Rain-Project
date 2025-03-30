@@ -64,13 +64,13 @@ std::vector<char> randomChars(int length) {
 	const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	std::vector<char> result(length);
 	for (char& c : result) {
-		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)]; // Fixed warning C4267
+		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)];
 	}
 	return result;
 }
 
 std::string randomColor() {
-	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)]; // Fixed warning C4267
+	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)];
 }
 
 // Main Functions
