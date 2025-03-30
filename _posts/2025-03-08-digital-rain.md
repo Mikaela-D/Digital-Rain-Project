@@ -237,11 +237,9 @@ The challenge with randomising raindrop properties (characters, colours, and len
 ---
 
 ## Modern C++ Insight and Reflection
-This project explores various modern C++ techniques:
 
-- Random number generation using `std::random_device` and `std::mt19937`.
-- Threading & performance optimisations using `std::this_thread::sleep_for`.
-- Using ANSI escape codes for coloured terminal output.
+Modern C++ tools, like std::vector and std::mt19937, were essential for simplifying my project. I used std::vector to manage the raindrop properties like characters and colours. For randomness, I used std::mt19937 to generate random values, making sure that each raindrop was unique.  
+These modern C++ features made the implementation smoother and more efficient than I expected.
 
 ---
 
