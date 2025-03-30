@@ -116,6 +116,51 @@ int main() {
 }
 ```
 
+5. Updating the Screen
+
+The clearScreen function clears the screen so I can update it with the new positions and colors of the raindrops.
+'screen' is a 2D array that holds the characters representing the screen. It clears the screen by setting all characters to ' '.
+'colorScreen' is a 2D array that holds the colour codes for each character in the screen. It clears the colorScreen by setting all colours to the reset colour "\033[0m".
+
+```cpp
+void Screen::clearScreen() {
+	for (std::vector<char>& row : screen) {
+		std::fill(row.begin(), row.end(), ' ');
+	}
+	for (std::vector<std::string>& row : colorScreen) {
+		std::fill(row.begin(), row.end(), "\033[0m");
+	}
+}
+```
+After clearing the screen, I use the updateScreen function to update it with the new positions and colours of the raindrops.
+The outer loop is used to access each raindrop, and the inner loop is used to handle each character within the raindrop.
+The y position of each character within a raindrop is calculated by subtracting i from drop.y. This means that the raindrop's bottom will be higher (more negative y-coordinates), and the head will be lower.
+
+```cpp
+void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
+	screen.clearScreen();
+	for (const Raindrop& drop : raindrops) {
+		for (int i = 0; i < drop.length; ++i) {
+			int y = drop.y - i;
+			if (y >= 0 && y < screen.screenHeight) {
+				screen.drawSymbol(drop.x, y, drop.symbols[i], drop.colors[i]);
+			}
+		}
+	}
+}
+```
+
+Lastly, I use the drawSymbol function to place the character and its colour on the screen.
+
+```cpp
+void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
+	if (x >= 0 && x < screenWidth && y >= 0 && y < screenHeight) {
+		screen[y][x] = symbol;
+		colorScreen[y][x] = color;
+	}
+}
+```
+
 ## Algorithm
 The rain effect is implemented using **randomised characters** and **falling movement simulation**.
 
@@ -158,5 +203,5 @@ These are the resources I used while working on the project:
 [5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 [6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/
 [7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/
-
+[8] ChatGPT. (GPT-4). Open AI. [Online]. Available: https://chatgpt.com/
 ---
