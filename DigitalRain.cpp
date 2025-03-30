@@ -1,4 +1,12 @@
-﻿// DigitalRain.cpp
+﻿/*
+			  _,-'/-'/
+  .      __,-; ,'( '/
+   \.    `-.__`-._`:_,-._       _ , . ``
+	`:-._,------' ` _,`--` -: `_ , ` ,' :
+	   `---..__,,--'            ` -'. -'
+
+Mikaela Diaz
+*/
 
 #include "DigitalRain.h"
 #include <thread>       // std::this_thread::sleep_for

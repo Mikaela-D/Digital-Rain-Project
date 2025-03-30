@@ -1,4 +1,12 @@
-// DigitalRain.h
+/*
+			  _,-'/-'/
+  .      __,-; ,'( '/
+   \.    `-.__`-._`:_,-._       _ , . ``
+	`:-._,------' ` _,`--` -: `_ , ` ,' :
+	   `---..__,,--'            ` -'. -'
+
+Mikaela Diaz
+*/
 
 #ifndef DIGITALRAIN_H
 #define DIGITALRAIN_H
