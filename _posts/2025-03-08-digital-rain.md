@@ -162,6 +162,38 @@ void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
 	}
 }
 ```
+### Testing Function
+
+I added a simple testing function testSimulateRainfall to test that the simulateRainfall function works correctly.  
+In the test, I call simulateRainfall with specific parameters that I set in the testSimulateRainfall function.  
+I make the test function work by commenting out the simulateRainfall function in main.pp and adding testSimulateRainfall instead.
+
+Test.h File
+```cpp
+#ifndef TEST_H
+#define TEST_H
+
+void testSimulateRainfall();
+
+#endif // TEST_H
+```
+
+Test.cpp File
+```cpp
+#include "DigitalRain.h"
+#include "Test.h"
+
+void testSimulateRainfall() {
+	int screenWidth = 80;
+	int screenHeight = 20;
+	int numRaindrops = 5;
+	int minLength = 5;
+	int maxLength = 10;
+	int animationSpeed = 10;
+
+	simulateRainfall(screenWidth, screenHeight, numRaindrops, minLength, maxLength, animationSpeed);
+}
+```
 
 ## Algorithm
 The rain effect is implemented using **randomised characters** and **falling movement simulation**.
