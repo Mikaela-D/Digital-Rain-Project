@@ -30,16 +30,39 @@ For this project, I designed the following features:
 6. A function to test the simulation works.
 
 1. Random Characters
-```cpp
-#include <iostream>
-#include "DigitalRain.h"
+To generate random characters, I reused a function called randomInt that  generates a random integer within a given range between a minimum and a maximum number.
+I learned how to make this function using [7].
 
-int main() {
-    return 0;
+std::random_device rd: Creates a random seed based on the system’s state, such as the system clock, providing a true random value for seeding the generator.
+std::mt19937 gen(rd()): Initialises a pseudo-random number generator (Mersenne Twister), seeded with rd, ensuring different random numbers each time the program runs.
+std::uniform_int_distribution<> dist(min, max): Defines a uniform distribution that generates random integers between min and max, ensuring all values in the range have an equal chance of being selected.
+dist(gen): Uses the generator gen and the distribution dist to produce and return a random integer within the specified range.
+
+```cpp
+int randomInt(int min, int max) {
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dist(min, max);
+	return dist(gen);
 }
 ```
-
+The randomChars function generates a sequence of random characters.
+It defines a string 'chars' containing uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).  
+A vector 'result' stores the random characters.  
+A loop assigns each character in the vector a random character 'chars' by calling the randomInt function to get a random index.
+Then, after filling the vector, the function returns the vector with random characters.
 ---
+
+```cpp
+std::vector<char> randomChars(int length) {
+	const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	std::vector<char> result(length);
+	for (char& c : result) {
+		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)];
+	}
+	return result;
+}
+```
 
 ## Algorithm
 The rain effect is implemented using **randomised characters** and **falling movement simulation**.
