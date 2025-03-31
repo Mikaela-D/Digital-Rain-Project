@@ -88,16 +88,17 @@ I randomise the length of the raindrop, generate new random characters, and assi
 ```cpp
 void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
 	for (Raindrop& drop : raindrops) {
-		drop.y++;
-		if (drop.y - drop.length >= screenHeight) {
-			drop.y = 0;
-			drop.x = randomInt(0, screenWidth - 1);
-			drop.length = randomInt(minLength, maxLength);
-			drop.symbols = randomChars(drop.length);
-			drop.colors.resize(drop.length);
-			for (std::string& color : drop.colors) {
+		drop.setY(drop.getY() + 1);
+		if (drop.getY() - drop.getLength() >= screenHeight) {
+			drop.setY(0);
+			drop.setX(randomInt(0, screenWidth - 1));
+			drop.setLength(randomInt(minLength, maxLength));
+			drop.setSymbols(randomChars(drop.getLength()));
+			std::vector<std::string> newColors(drop.getLength());
+			for (std::string& color : newColors) {
 				color = randomColor();
 			}
+			drop.setColors(newColors);
 		}
 	}
 }
@@ -144,10 +145,10 @@ The y position of each character within a raindrop is calculated by subtracting 
 void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 	screen.clearScreen();
 	for (const Raindrop& drop : raindrops) {
-		for (int i = 0; i < drop.length; ++i) {
-			int y = drop.y - i;
-			if (y >= 0 && y < screen.screenHeight) {
-				screen.drawSymbol(drop.x, y, drop.symbols[i], drop.colors[i]);
+		for (int i = 0; i < drop.getLength(); ++i) {
+			int y = drop.getY() - i;
+			if (y >= 0 && y < screen.getScreenHeight()) {
+				screen.drawSymbol(drop.getX(), y, drop.getSymbols()[i], drop.getColors()[i]);
 			}
 		}
 	}
