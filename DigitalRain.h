@@ -18,27 +18,43 @@ Mikaela Diaz
 
 class Raindrop {
 public:
+	Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors);
+
+	int getX() const;
+	int getY() const;
+	int getLength() const;
+	const std::vector<char>& getSymbols() const;
+	const std::vector<std::string>& getColors() const;
+	void setY(int newY);
+	void setX(int newX);
+	void setLength(int newLength);
+	void setSymbols(const std::vector<char>& newSymbols);
+	void setColors(const std::vector<std::string>& newColors);
+
+private:
 	int x;
 	int y;
 	int length;
 	std::vector<char> symbols;
 	std::vector<std::string> colors;
-
-	Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors);
 };
 
 class Screen {
 public:
-	int screenWidth;
-	int screenHeight;
-	std::vector<std::vector<char>> screen;
-	std::vector<std::vector<std::string>> colorScreen;
-
 	Screen(int screenWidth, int screenHeight);
 
 	void clearScreen();
 	void drawSymbol(int x, int y, char symbol, const std::string& color);
 	void print() const;
+
+	int getScreenWidth() const;
+	int getScreenHeight() const;
+
+private:
+	int screenWidth;
+	int screenHeight;
+	std::vector<std::vector<char>> screen;
+	std::vector<std::vector<std::string>> colorScreen;
 };
 
 int randomInt(int min, int max);

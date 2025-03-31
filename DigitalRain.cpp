@@ -23,16 +23,29 @@ constexpr const char* COLORS[] = {
 	"\033[37m"  // White
 };
 
-// Class Definitions
 Raindrop::Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
 	: x(xPosition), y(yPosition), length(dropLength), symbols(dropSymbols), colors(dropColors) {
 }
+
+int Raindrop::getX() const { return x; }
+int Raindrop::getY() const { return y; }
+int Raindrop::getLength() const { return length; }
+const std::vector<char>& Raindrop::getSymbols() const { return symbols; }
+const std::vector<std::string>& Raindrop::getColors() const { return colors; }
+void Raindrop::setY(int newY) { y = newY; }
+void Raindrop::setX(int newX) { x = newX; }
+void Raindrop::setLength(int newLength) { length = newLength; }
+void Raindrop::setSymbols(const std::vector<char>& newSymbols) { symbols = newSymbols; }
+void Raindrop::setColors(const std::vector<std::string>& newColors) { colors = newColors; }
 
 Screen::Screen(int screenWidth, int screenHeight)
 	: screenWidth(screenWidth), screenHeight(screenHeight),
 	screen(screenHeight, std::vector<char>(screenWidth, ' ')),
 	colorScreen(screenHeight, std::vector<std::string>(screenWidth, "\033[0m")) {
 }
+
+int Screen::getScreenWidth() const { return screenWidth; }
+int Screen::getScreenHeight() const { return screenHeight; }
 
 void Screen::clearScreen() {
 	for (std::vector<char>& row : screen) {
@@ -100,10 +113,10 @@ std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int n
 void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 	screen.clearScreen();
 	for (const Raindrop& drop : raindrops) {
-		for (int i = 0; i < drop.length; ++i) {
-			int y = drop.y - i;
-			if (y >= 0 && y < screen.screenHeight) {
-				screen.drawSymbol(drop.x, y, drop.symbols[i], drop.colors[i]);
+		for (int i = 0; i < drop.getLength(); ++i) {
+			int y = drop.getY() - i;
+			if (y >= 0 && y < screen.getScreenHeight()) {
+				screen.drawSymbol(drop.getX(), y, drop.getSymbols()[i], drop.getColors()[i]);
 			}
 		}
 	}
@@ -111,16 +124,17 @@ void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 
 void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
 	for (Raindrop& drop : raindrops) {
-		drop.y++;
-		if (drop.y - drop.length >= screenHeight) {
-			drop.y = 0;
-			drop.x = randomInt(0, screenWidth - 1);
-			drop.length = randomInt(minLength, maxLength);
-			drop.symbols = randomChars(drop.length);
-			drop.colors.resize(drop.length);
-			for (std::string& color : drop.colors) {
+		drop.setY(drop.getY() + 1);
+		if (drop.getY() - drop.getLength() >= screenHeight) {
+			drop.setY(0);
+			drop.setX(randomInt(0, screenWidth - 1));
+			drop.setLength(randomInt(minLength, maxLength));
+			drop.setSymbols(randomChars(drop.getLength()));
+			std::vector<std::string> newColors(drop.getLength());
+			for (std::string& color : newColors) {
 				color = randomColor();
 			}
+			drop.setColors(newColors);
 		}
 	}
 }
