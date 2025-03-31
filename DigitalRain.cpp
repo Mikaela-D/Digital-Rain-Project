@@ -97,7 +97,6 @@ std::string randomColor() {
 // Main Functions
 std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength) {
 	std::vector<Raindrop> raindrops;
-	raindrops.reserve(numRaindrops);
 	for (int i = 0; i < numRaindrops; ++i) {
 		int length = randomInt(minLength, maxLength);
 		std::vector<char> symbols = randomChars(length);
