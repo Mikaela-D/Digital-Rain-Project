@@ -68,7 +68,7 @@ void Screen::print() const {
 		for (int x = 0; x < screenWidth; ++x) {
 			std::cout << colorScreen[y][x] << screen[y][x];
 		}
-		std::cout << "\033[0m" << std::endl;
+		std::cout << "\033[0m" << std::endl; // Reset terminal colour
 	}
 	std::cout << std::string(screenWidth, '_') << std::endl;
 }
