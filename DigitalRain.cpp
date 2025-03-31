@@ -1,118 +1,155 @@
 ﻿/*
-
-
-              _,-'/-'/
+			  _,-'/-'/
   .      __,-; ,'( '/
    \.    `-.__`-._`:_,-._       _ , . ``
-    `:-._,------' ` _,`--` -: `_ , ` ,' :
-       `---..__,,--'            ` -'. -'
+	`:-._,------' ` _,`--` -: `_ , ` ,' :
+	   `---..__,,--'            ` -'. -'
 
 Mikaela Diaz
 */
 
 #include "DigitalRain.h"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <thread>
-#include <chrono>
-#include <random>
-#include <vector>
-#include <string>
+#include <thread>       // std::this_thread::sleep_for
+#include <chrono>       // std::chrono::milliseconds
+#include <algorithm>    // std::fill
 
-// Generate random integer
+constexpr const char* COLORS[] = {
+	"\033[31m", // Red
+	"\033[32m", // Green
+	"\033[33m", // Yellow
+	"\033[34m", // Blue
+	"\033[35m", // Magenta
+	"\033[36m", // Cyan
+	"\033[37m"  // White
+};
+
+Raindrop::Raindrop(int xPosition, int yPosition, int dropLength, const std::vector<char>& dropSymbols, const std::vector<std::string>& dropColors)
+	: x(xPosition), y(yPosition), length(dropLength), symbols(dropSymbols), colors(dropColors) {
+}
+
+int Raindrop::getX() const { return x; }
+int Raindrop::getY() const { return y; }
+int Raindrop::getLength() const { return length; }
+const std::vector<char>& Raindrop::getSymbols() const { return symbols; }
+const std::vector<std::string>& Raindrop::getColors() const { return colors; }
+void Raindrop::setY(int newY) { y = newY; }
+void Raindrop::setX(int newX) { x = newX; }
+void Raindrop::setLength(int newLength) { length = newLength; }
+void Raindrop::setSymbols(const std::vector<char>& newSymbols) { symbols = newSymbols; }
+void Raindrop::setColors(const std::vector<std::string>& newColors) { colors = newColors; }
+
+Screen::Screen(int screenWidth, int screenHeight)
+	: screenWidth(screenWidth), screenHeight(screenHeight),
+	screen(screenHeight, std::vector<char>(screenWidth, ' ')),
+	colorScreen(screenHeight, std::vector<std::string>(screenWidth, "\033[0m")) {
+}
+
+int Screen::getScreenWidth() const { return screenWidth; }
+int Screen::getScreenHeight() const { return screenHeight; }
+
+void Screen::clearScreen() {
+	for (std::vector<char>& row : screen) {
+		std::fill(row.begin(), row.end(), ' ');
+	}
+	for (std::vector<std::string>& row : colorScreen) {
+		std::fill(row.begin(), row.end(), "\033[0m");
+	}
+}
+
+void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
+	if (x >= 0 && x < screenWidth && y >= 0 && y < screenHeight) {
+		screen[y][x] = symbol;
+		colorScreen[y][x] = color;
+	}
+}
+
+void Screen::print() const {
+	for (int y = 0; y < screenHeight; ++y) {
+		for (int x = 0; x < screenWidth; ++x) {
+			std::cout << colorScreen[y][x] << screen[y][x];
+		}
+		std::cout << "\033[0m" << std::endl; // Reset terminal colour
+	}
+	std::cout << std::string(screenWidth, '_') << std::endl;
+}
+
+// Utility Functions
 int randomInt(int min, int max) {
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(min, max);
-    return dist(gen);
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dist(min, max);
+	return dist(gen);
 }
 
-// Generate a string of random characters
-std::string randomChars(int length) {
-    const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%^&*()[]{}|<>";
-    std::string result;
-    result.reserve(length);
-    for (int i = 0; i < length; ++i) {
-        result += chars[randomInt(0, chars.length() - 1)];
-    }
-    return result;
+std::vector<char> randomChars(int length) {
+	const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	std::vector<char> result(length);
+	for (char& c : result) {
+		c = chars[randomInt(0, static_cast<int>(chars.size()) - 1)];
+	}
+	return result;
 }
 
-// Function to generate a random color code
 std::string randomColor() {
-    const std::string colors[] = {
-        "\033[31m", // Red
-        "\033[32m", // Green
-        "\033[33m", // Yellow
-        "\033[34m", // Blue
-        "\033[35m", // Magenta
-        "\033[36m", // Cyan
-        "\033[37m"  // White
-    };
-    return colors[randomInt(0, 6)];
+	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)];
 }
 
-// Function to simulate rainfall
-void simulateRainfall(int width, int height, int numRaindrops) {
-    std::vector<Raindrop> raindrops;
-    raindrops.reserve(numRaindrops);
-    for (int i = 0; i < numRaindrops; ++i) {
-        std::string symbols = randomChars(randomInt(3, 5));
-        std::vector<std::string> colors;
-        colors.reserve(symbols.length());
-        for (char c : symbols) {
-            colors.push_back(randomColor());
-        }
-        raindrops.push_back({ randomInt(0, width - 1), randomInt(0, height - 1), randomInt(10, 15), symbols, colors });
-    }
+// Main Functions
+std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength) {
+	std::vector<Raindrop> raindrops;
+	for (int i = 0; i < numRaindrops; ++i) {
+		int length = randomInt(minLength, maxLength);
+		std::vector<char> symbols = randomChars(length);
+		std::vector<std::string> colors(length);
+		for (std::string& color : colors) {
+			color = randomColor();
+		}
+		Raindrop raindrop(randomInt(0, screenWidth - 1), randomInt(0, screenHeight - 1), length, symbols, colors);
+		raindrops.push_back(raindrop);
+	}
+	return raindrops;
+}
 
-    std::cout << "\033[?25l";  // Hide cursor 
+void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
+	screen.clearScreen();
+	for (const Raindrop& raindrop : raindrops) {
+		for (int i = 0; i < raindrop.getLength(); ++i) {
+			int y = raindrop.getY() - i;
+			if (y >= 0 && y < screen.getScreenHeight()) {
+				screen.drawSymbol(raindrop.getX(), y, raindrop.getSymbols()[i], raindrop.getColors()[i]);
+			}
+		}
+	}
+}
 
-    while (true) {
-        std::vector<std::vector<char>> screen(height, std::vector<char>(width, ' '));
-        std::vector<std::vector<std::string>> colorScreen(height, std::vector<std::string>(width, "\033[0m"));
+void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
+	for (Raindrop& raindrop : raindrops) {
+		raindrop.setY(raindrop.getY() + 1);
+		if (raindrop.getY() - raindrop.getLength() >= screenHeight) {
+			raindrop.setY(0);
+			raindrop.setX(randomInt(0, screenWidth - 1));
+			raindrop.setLength(randomInt(minLength, maxLength));
+			raindrop.setSymbols(randomChars(raindrop.getLength()));
+			std::vector<std::string> newColors(raindrop.getLength());
+			for (std::string& color : newColors) {
+				color = randomColor();
+			}
+			raindrop.setColors(newColors);
+		}
+	}
+}
 
-        for (auto& drop : raindrops) {
-            for (int i = 0; i < drop.length; ++i) {
-                int y = drop.y - i;
-                if (y >= 0 && y < height) {
-                    int index = i % drop.symbols.length();
-                    screen[y][drop.x] = drop.symbols[index];
-                    colorScreen[y][drop.x] = drop.colors[index];
-                }
-            }
-        }
+void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength, int animationSpeed) {
+	std::vector<Raindrop> raindrops = generateRaindrops(screenWidth, screenHeight, numRaindrops, minLength, maxLength);
+	Screen screen(screenWidth, screenHeight);
 
-        for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {
-                std::cout << colorScreen[y][x] << screen[y][x];
-            }
-            std::cout << "\033[0m" << std::endl; // Reset color at the end of each line
-        }
-
-        // Print the ground line
-        std::cout << std::string(width, '_') << std::endl;
-
-        // Move each raindrop downwards
-        for (auto& drop : raindrops) {
-            drop.y++;
-            if (drop.y - drop.length >= height) {
-                drop.y = 0;
-                drop.x = randomInt(0, width - 1);
-                drop.length = randomInt(10, 15); // Assign a new random length to the raindrop
-                drop.symbols = randomChars(randomInt(3, 5)); // New random symbols for each raindrop
-                drop.colors.clear();
-                for (char c : drop.symbols) {
-                    drop.colors.push_back(randomColor());
-                }
-            }
-        }
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(50)); // Speed of the animation
-
-        std::cout << "\033[H"; // Move the cursor back to the top-left corner
-    }
-
-    std::cout << "\033[?25h";  // Show the cursor again when the simulation ends
+	std::cout << "\033[?25l";  // Hide cursor
+	while (true) {
+		updateScreen(screen, raindrops);
+		screen.print();
+		moveRaindrops(raindrops, screenWidth, screenHeight, minLength, maxLength);
+		std::this_thread::sleep_for(std::chrono::milliseconds(animationSpeed));
+		std::cout << "\033[H";  // Move cursor to home position
+	}
+	std::cout << "\033[?25h";  // Show cursor
 }
