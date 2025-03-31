@@ -104,36 +104,37 @@ std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int n
 		for (std::string& color : colors) {
 			color = randomColor();
 		}
-		raindrops.emplace_back(randomInt(0, screenWidth - 1), randomInt(0, screenHeight - 1), length, symbols, colors);
+		Raindrop raindrop(randomInt(0, screenWidth - 1), randomInt(0, screenHeight - 1), length, symbols, colors);
+		raindrops.push_back(raindrop);
 	}
 	return raindrops;
 }
 
 void updateScreen(Screen& screen, const std::vector<Raindrop>& raindrops) {
 	screen.clearScreen();
-	for (const Raindrop& drop : raindrops) {
-		for (int i = 0; i < drop.getLength(); ++i) {
-			int y = drop.getY() - i;
+	for (const Raindrop& raindrop : raindrops) {
+		for (int i = 0; i < raindrop.getLength(); ++i) {
+			int y = raindrop.getY() - i;
 			if (y >= 0 && y < screen.getScreenHeight()) {
-				screen.drawSymbol(drop.getX(), y, drop.getSymbols()[i], drop.getColors()[i]);
+				screen.drawSymbol(raindrop.getX(), y, raindrop.getSymbols()[i], raindrop.getColors()[i]);
 			}
 		}
 	}
 }
 
 void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
-	for (Raindrop& drop : raindrops) {
-		drop.setY(drop.getY() + 1);
-		if (drop.getY() - drop.getLength() >= screenHeight) {
-			drop.setY(0);
-			drop.setX(randomInt(0, screenWidth - 1));
-			drop.setLength(randomInt(minLength, maxLength));
-			drop.setSymbols(randomChars(drop.getLength()));
-			std::vector<std::string> newColors(drop.getLength());
+	for (Raindrop& raindrop : raindrops) {
+		raindrop.setY(raindrop.getY() + 1);
+		if (raindrop.getY() - raindrop.getLength() >= screenHeight) {
+			raindrop.setY(0);
+			raindrop.setX(randomInt(0, screenWidth - 1));
+			raindrop.setLength(randomInt(minLength, maxLength));
+			raindrop.setSymbols(randomChars(raindrop.getLength()));
+			std::vector<std::string> newColors(raindrop.getLength());
 			for (std::string& color : newColors) {
 				color = randomColor();
 			}
-			drop.setColors(newColors);
+			raindrop.setColors(newColors);
 		}
 	}
 }
