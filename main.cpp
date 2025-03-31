@@ -12,7 +12,12 @@ Mikaela Diaz
 #include "Test.h"
 
 int main() {
-	simulateRainfall(120, 25, 15, 10, 15, 50);
-	//testSimulateRainfall();
+	try {
+		simulateRainfall(120, 25, 15, 10, 15, 50);
+		//testSimulateRainfall();
+	}
+	catch (const std::exception& e) {
+		std::cerr << "An error occurred: " << e.what() << std::endl;
+	}
 	return 0;
 }
