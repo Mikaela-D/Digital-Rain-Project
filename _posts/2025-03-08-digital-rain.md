@@ -203,8 +203,8 @@ I also included a basic try-catch to catch and print any errors.
 ```cpp
 int main() {
 	try {
-		simulateRainfall(120, 25, 15, 10, 15, 50);
-		//testSimulateRainfall();
+		//simulateRainfall(120, 25, 15, 10, 15, 50);
+		testSimulateRainfall();
 	}
 	catch (const std::exception& e) {
 		std::cerr << "An error occurred: " << e.what() << std::endl;
