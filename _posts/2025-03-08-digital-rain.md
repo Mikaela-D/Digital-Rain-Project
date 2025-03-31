@@ -13,7 +13,8 @@ For my C++ Programming Module, I developed a Digital Rain project using modern C
 
 Digital Rain is the visual effect of vertically falling computer code [1], which appeared in the Matrix movies. Digital Rain has been used in numerous computer and video games and films since it was introduced and popularised by the now world-renowned "The Matrix" movie produced by Simon Whiteley and his wife. Digital Rain is a cascade of dropping lines of randomly combined characters simulating rain. 
 
-When I started this project, I wanted to recreate the digital rain effect using modern C++. I explored methods to store arrays of random characters in vectors, which allowed me to efficiently process and print them as single strings. 
+When I started this project, I wanted to recreate the digital rain effect using modern C++. I viewed online resources to get inspiration for my project, such as [2], [3], and [4].  
+I explored methods to store arrays of random characters in vectors, which allowed me to efficiently process and print them as single strings. 
 Also, I used ANSI escape codes for colour and cursor control, which made the rainfall effect more visually appealing by making the rainfall colourful and hiding or showing the cursor. 
 
 So, what my project does is it simulates the iconic falling code effect seen in movies like The Matrix. It randomly generates characters (letters and numbers) that fall from the top to the bottom of the screen, with each raindrop having different colours and lengths. The animation is customisable in terms of screen size, number of raindrops, and speed.
@@ -67,7 +68,7 @@ std::vector<char> randomChars(int length) {
 
 ### 2. Randomly Assigned Colour
 
-The randomColor function selects a random colour from the COLORS array and assigns it to a character.  
+The randomColor function selects a random colour from the COLORS array and assigns it to a character. I found the colour codes using [5] and [6].  
 It works by generating a random index within the valid range of the COLORS array.  
 Then, COLORS[...] retrieves the colour at the generated index and returns the selected colour as a string.
 
@@ -240,7 +241,8 @@ The challenge with randomising raindrop properties (characters, colours, and len
 
 ## Modern C++ Insight and Reflection
 
-Modern C++ tools, like std::vector and std::mt19937, were essential for simplifying my project. I used std::vector to manage the raindrop properties like characters and colours. For randomness, I used std::mt19937 to generate random values, making sure that each raindrop was unique.  
+Modern C++ tools, like std::vector and std::mt19937, were essential for simplifying my project. I used std::vector to manage the raindrop properties like characters and colours.  
+For randomness, I used std::mt19937 to generate random values, making sure that each raindrop was unique.  
 These modern C++ features made the implementation smoother and more efficient than I expected.
 
 ---
