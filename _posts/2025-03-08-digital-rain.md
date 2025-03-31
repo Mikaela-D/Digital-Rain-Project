@@ -254,6 +254,18 @@ The main challenge with raindrop movement was making sure they fall smoothly fro
 The challenge with randomising raindrop properties (characters, colours, and length) was making sure each raindrop was unique. I used a random number generator to assign different characters and colours to each raindrop.  
 I also faced a challenge clearing the screen; if I simply used system("cls"), I saw a flickering on the screen that reduced the quality of the animation. I solved it by adding the clearScreen function.
 
+The challenge I encountered when designing the raindrop movements was making raindrops move smoothly while resetting them correctly after hitting the bottom. Initially, some raindrops disappeared too soon or overlapped unexpectedly.
+
+To fix it, I made sure each raindrop's y position increased (drop.y++) every frame and added a check to reset raindrops only when their full length had exited the screen.
+
+```cpp
+if (raindrop.getY() - raindrop.getLength() >= screenHeight) {
+	raindrop.setY(0);
+	raindrop.setX(randomInt(0, screenWidth - 1));
+	raindrop.setLength(randomInt(minLength, maxLength));
+	raindrop.setSymbols(randomChars(raindrop.getLength()));
+```
+
 ---
 
 ## Modern C++ Insight and Reflection
