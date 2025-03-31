@@ -53,7 +53,8 @@ The randomChars function generates a sequence of random characters.
 It defines a string 'chars' containing uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).  
 A vector 'result' stores the random characters.  
 A loop assigns each character in the vector a random character 'chars' by calling the randomInt function to get a random index.
-Then, after filling the vector, the function returns the vector with random characters.
+Then, after filling the vector, the function returns the vector with random characters.  
+In this code, I use static_cast<int> to ensure that the size of the chars string is properly converted from std::string::size_type (which is an unsigned type) to int before using it as an index. This conversion is necessary because the randomInt function expects int values for its arguments, but chars.size() returns a value of type std::string::size_type, which could be an unsigned integer. I learned how to do this using [10]. 
 
 ```cpp
 std::vector<char> randomChars(int length) {
@@ -233,7 +234,7 @@ void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int m
 ## Problem Solving
 Some challenges I faced during development:
 
-The biggest challenges I faced during development were the raindrop movements and the random selection for the characters, colours, and length.  
+The biggest challenges I faced during development were the raindrop movements and random selection for the characters, colours, and length.  
 The main challenge with raindrop movement was making sure they fall smoothly from top to bottom and reset when they hit the bottom. I had to carefully update their position and redraw them at the new location while clearing the screen in between to keep the animation fluid.  
 The challenge with randomising raindrop properties (characters, colours, and length) was making sure each raindrop was unique. I used a random number generator to assign different characters and colours to each raindrop.
 
@@ -257,4 +258,6 @@ These are the resources I used while working on the project:
 [5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences  
 [6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/  
 [7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/  
-[8] ChatGPT. (GPT-4). Open AI. [Online]. Available: https://chatgpt.com/
+[8] ChatGPT. (GPT-4). Open AI. [Online]. Available: https://chatgpt.com/  
+[9] Learn C++. [Online]. Available: https://www.learncpp.com/  
+[10] Stack Overflow, "What's the best strategy to get rid of "warning C4267 possible loss of data"?", [Online]. Available: https://stackoverflow.com/questions/36834799/whats-the-best-strategy-to-get-rid-of-warning-c4267-possible-loss-of-data
