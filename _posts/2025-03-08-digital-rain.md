@@ -251,7 +251,8 @@ Some challenges I faced during development:
 
 The biggest challenges I faced during development were the raindrop movements and random selection for the characters, colours, and length.  
 The main challenge with raindrop movement was making sure they fall smoothly from top to bottom and reset when they hit the bottom. I had to carefully update their position and redraw them at the new location while clearing the screen in between to keep the animation fluid.  
-The challenge with randomising raindrop properties (characters, colours, and length) was making sure each raindrop was unique. I used a random number generator to assign different characters and colours to each raindrop.
+The challenge with randomising raindrop properties (characters, colours, and length) was making sure each raindrop was unique. I used a random number generator to assign different characters and colours to each raindrop.  
+I also faced a challenge clearing the screen; if I simply used system("cls"), I saw a flickering on the screen that reduced the quality of the animation. I solved it by adding the clearScreen function.
 
 ---
 
