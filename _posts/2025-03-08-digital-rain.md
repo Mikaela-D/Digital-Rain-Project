@@ -276,25 +276,46 @@ These C++ features made the coding process much easier and faster, allowing me t
 ## References
 These are the resources I used while working on the project:
 
-[1] Wikipedia, "Matrix Rain Algorithms", [Online]. Available: <a href="https://en.wikipedia.org/wiki/Matrix_digital_rain"></a>  
-[2] GitHub, "Matrix Digital Rain", [Online]. Available: https://github.com/Kevger/MatrixDigitalRain  
-[3] GitHub, "Digital Rain Project in C++", [Online]. Available: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html  
-[4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: https://github.com/st3w/neo  
-[5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences  
-[6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/  
-[7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/  
-[8] ChatGPT. (GPT-4). Open AI. [Online]. Available: https://chatgpt.com/  
-[9] Learn C++. "Learn C++", [Online]. Available: https://www.learncpp.com/  
-[10] Stack Overflow, "What's the best strategy to get rid of "warning C4267 possible loss of data"?", [Online]. Available: https://stackoverflow.com/questions/36834799/whats-the-best-strategy-to-get-rid-of-warning-c4267-possible-loss-of-data  
-[11] DevDocs, "C++ documentation", [Online]. Available: https://devdocs.io/cpp/  
-[12] Cppreference, "C++ reference", [Online]. Available: https://en.cppreference.com/w/  
-[13] Geeks for Geeks, "Vector push_back() in C++ STL", [Online]. Available: https://www.geeksforgeeks.org/vector-push-back-cpp-stl/  
-[14] W3Schools, "C++ Exceptions", [Online]. Available: https://www.w3schools.com/cpp/cpp_exceptions.asp  
-[15] W3Schools, "C++ Tutorial", [Online]. Available: https://www.w3schools.com/cpp/default.asp  
-[16] Medium, "C++ Classes and Objects", [Online]. Available: https://medium.com/@pawan2505/c-classes-and-objects-4c60de81aa2d  
-[17] Learn C++, "Generating random numbers using Mersenne Twister", [Online]. Available: https://www.learncpp.com/cpp-tutorial/generating-random-numbers-using-mersenne-twister/  
-[18] Geeks for Geeks, "Sleep Function in C++", [Online]. Available: https://www.geeksforgeeks.org/sleep-function-in-cpp/  
-[19] Geeks for Geeks, "Implementation of a Falling Matrix", [Online]. Available: https://www.geeksforgeeks.org/implementation-falling-matrix/  
-[20] Geeks for Geeks, "2D Vector in C++", [Online]. Available: https://www.geeksforgeeks.org/2d-vector-in-cpp-with-user-defined-size/  
-[21] Cppreference, "std::fill", [Online]. Available: https://en.cppreference.com/w/cpp/algorithm/fill  
-[22] Stack Overflow, "Creating rain drops", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+[1] Wikipedia, "Matrix Rain Algorithms", [Online]. Available: <a href="https://en.wikipedia.org/wiki/Matrix_digital_rain" target="_blank">https://en.wikipedia.org/wiki/Matrix_digital_rain</a>  
+[2] GitHub, "Matrix Digital Rain", [Online]. Available: <a href="https://github.com/Kevger/MatrixDigitalRain" target="_blank">https://github.com/Kevger/MatrixDigitalRain</a>
+
+[3] GitHub, "Digital Rain Project in C++", [Online]. Available: <a href="https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html" target="_blank">https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html</a>
+
+[4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: <a href="https://github.com/st3w/neo" target="_blank">https://github.com/st3w/neo</a>
+
+[5] Stack Overflow, "List of ANSI color escape sequences", [Online]. Available: <a href="https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences" target="_blank">https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences</a>
+
+[6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: <a href="https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/" target="_blank">https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/</a>
+
+[7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: <a href="https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/" target="_blank">https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/</a>
+
+[8] ChatGPT. (GPT-4). Open AI. [Online]. Available: <a href="https://chatgpt.com/" target="_blank">https://chatgpt.com/</a>
+
+[9] Learn C++, "Learn C++", [Online]. Available: <a href="https://www.learncpp.com/" target="_blank">https://www.learncpp.com/</a>
+
+[10] Stack Overflow, "What's the best strategy to get rid of "warning C4267 possible loss of data"?", [Online]. Available: <a href="https://stackoverflow.com/questions/36834799/whats-the-best-strategy-to-get-rid-of-warning-c4267-possible-loss-of-data" target="_blank">https://stackoverflow.com/questions/36834799/whats-the-best-strategy-to-get-rid-of-warning-c4267-possible-loss-of-data</a>
+
+[11] DevDocs, "C++ documentation", [Online]. Available: <a href="https://devdocs.io/cpp/" target="_blank">https://devdocs.io/cpp/</a>
+
+[12] Cppreference, "C++ reference", [Online]. Available: <a href="https://en.cppreference.com/w/" target="_blank">https://en.cppreference.com/w/</a>
+
+[13] Geeks for Geeks, "Vector push_back() in C++ STL", [Online]. Available: <a href="https://www.geeksforgeeks.org/vector-push-back-cpp-stl/" target="_blank">https://www.geeksforgeeks.org/vector-push-back-cpp-stl/</a>
+
+[14] W3Schools, "C++ Exceptions", [Online]. Available: <a href="https://www.w3schools.com/cpp/cpp_exceptions.asp" target="_blank">https://www.w3schools.com/cpp/cpp_exceptions.asp</a>
+
+[15] W3Schools, "C++ Tutorial", [Online]. Available: <a href="https://www.w3schools.com/cpp/default.asp" target="_blank">https://www.w3schools.com/cpp/default.asp</a>
+
+[16] Medium, "C++ Classes and Objects", [Online]. Available: <a href="https://medium.com/@pawan2505/c-classes-and-objects-4c60de81aa2d" target="_blank">https://medium.com/@pawan2505/c-classes-and-objects-4c60de81aa2d</a>
+
+[17] Learn C++, "Generating random numbers using Mersenne Twister", [Online]. Available: <a href="https://www.learncpp.com/cpp-tutorial/generating-random-numbers-using-mersenne-twister/" target="_blank">https://www.learncpp.com/cpp-tutorial/generating-random-numbers-using-mersenne-twister/</a>
+
+[18] Geeks for Geeks, "Sleep Function in C++", [Online]. Available: <a href="https://www.geeksforgeeks.org/sleep-function-in-cpp/" target="_blank">https://www.geeksforgeeks.org/sleep-function-in-cpp/</a>
+
+[19] Geeks for Geeks, "Implementation of a Falling Matrix", [Online]. Available: <a href="https://www.geeksforgeeks.org/implementation-falling-matrix/" target="_blank">https://www.geeksforgeeks.org/implementation-falling-matrix/</a>
+
+[20] Geeks for Geeks, "2D Vector in C++", [Online]. Available: <a href="https://www.geeksforgeeks.org/2d-vector-in-cpp-with-user-defined-size/" target="_blank">https://www.geeksforgeeks.org/2d-vector-in-cpp-with-user-defined-size/</a>
+
+[21] Cppreference, "std::fill", [Online]. Available: <a href="https://en.cppreference.com/w/cpp/algorithm/fill" target="_blank">https://en.cppreference.com/w/cpp/algorithm/fill</a>
+
+[22] Stack Overflow, "Creating rain drops", [Online]. Available: <a href="https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences" target="_blank">https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences</a>
+
