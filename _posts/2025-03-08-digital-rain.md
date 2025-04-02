@@ -32,7 +32,7 @@ For this project, I designed the following features:
 5. The screen will be updated in each iteration to display falling raindrops without flickering.
 6. A function to test the simulation works.
 
-Some general resources I used during the development are [9], [11], [12], [13] for generateRaindrops(), and [15].
+Some general resources I used during the development are [9], [11], [12], [13] for generateRaindrops(), and [15]. I also used [16] for information about using classes and objects in C++.
 
 ### 1. Random Characters
 To generate random characters, I reused a function called randomInt that  generates a random integer within a given range between a minimum and a maximum number.
@@ -126,7 +126,7 @@ int main() {
 5. Updating the Screen
 
 The clearScreen function clears the screen so I can update it with the new positions and colors of the raindrops.
-'screen' is a 2D array that holds the characters representing the screen. It clears the screen by setting all characters to ' '. It uses std::fill [21] to quickly set all elements of each row to a blank space.
+'screen' is a 2D array [20] that holds the characters representing the screen. It clears the screen by setting all characters to ' '. It uses std::fill [21] to quickly set all elements of each row to a blank space.
 'colorScreen' is a 2D array that holds the colour codes for each character in the screen. It clears the colorScreen by setting all colours to the reset colour "\033[0m".
 
 ```cpp
