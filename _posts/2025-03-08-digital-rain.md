@@ -13,7 +13,7 @@ For my C++ Programming Module, I developed a Digital Rain project using modern C
 
 Digital Rain is the visual effect of vertically falling computer code [1], which appeared in the Matrix movies. Digital Rain has been used in numerous computer and video games and films since it was introduced and popularised by the now world-renowned "The Matrix" movie produced by Simon Whiteley and his wife. Digital Rain is a cascade of dropping lines of randomly combined characters simulating rain. 
 
-When I started this project, I wanted to recreate the digital rain effect using modern C++. I viewed online resources to get inspiration for my project, such as [2], [3], and [4].  
+When I started this project, I wanted to recreate the digital rain effect using modern C++. I viewed online resources to get inspiration for my project, such as [2], [3], [4], and [19].  
 I explored methods to store arrays of random characters in vectors, which allowed me to efficiently process and print them as single strings. 
 Also, I used ANSI escape codes for colour and cursor control, which made the rainfall effect more visually appealing by making the rainfall colourful and hiding or showing the cursor. 
 
@@ -34,7 +34,7 @@ For this project, I designed the following features:
 
 ### 1. Random Characters
 To generate random characters, I reused a function called randomInt that  generates a random integer within a given range between a minimum and a maximum number.
-I learned how to make this function using [7].
+I learned how to make this function using [7] and [17].
 
 std::random_device rd: Creates a random seed based on the system’s state, such as the system clock, providing a true random value for seeding the generator.
 std::mt19937 gen(rd()): Initialises a pseudo-random number generator (Mersenne Twister), seeded with rd, ensuring different random numbers each time the program runs.
@@ -221,7 +221,7 @@ Also, random lengths for each raindrop. I already explained how I achieved those
 
 The function begins by generating a list of raindrops with random properties (position, length, symbols, and colors) using the generateRaindrops function. These properties make sure that each raindrop is unique, adding variation to the digital rain effect. Then, a Screen object is created to represent the display area, with the specified width and height, which sets the boundaries for the animation. 
 To improve the visual experience and remove distractions, the terminal cursor is hidden at the beginning of the animation using the escape sequence \033[?25l. In the main loop, the updateScreen function is called to update the screen with the current positions and symbols of the raindrops, and the screen is printed to display the updated raindrops. The moveRaindrops function moves the raindrops down the screen. When a raindrop moves off the bottom of the screen, it restarts at the top with new random properties, keeping the animation dynamic.  
-To control the speed of the rain effect, the animation pauses for a short period using the animationSpeed variable, which controls how fast each frame of the animation is displayed. After each frame, the cursor is moved back to the top-left corner of the terminal using the escape sequence \033[H, preventing the animation from stacking up. When the animation ends, the cursor is made visible again using the escape sequence \033[?25h.
+To control the speed of the rain effect, the animation pauses for a short period using sleep_for(): [18] and the animationSpeed variable, which controls how fast each frame of the animation is displayed. After each frame, the cursor is moved back to the top-left corner of the terminal using the escape sequence \033[H, preventing the animation from stacking up. When the animation ends, the cursor is made visible again using the escape sequence \033[?25h.
 
 ```cpp
 void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength, int animationSpeed) {
@@ -276,7 +276,7 @@ These C++ features made the coding process much easier and faster, allowing me t
 ## References
 These are the resources I used while working on the project:
 
-[1] Wikipedia, " Matrix Rain Algorithms", [Online]. Available: https://en.wikipedia.org/wiki/Matrix_digital_rain  
+[1] Wikipedia, "Matrix Rain Algorithms", [Online]. Available: https://en.wikipedia.org/wiki/Matrix_digital_rain  
 [2] GitHub, "Matrix Digital Rain", [Online]. Available: https://github.com/Kevger/MatrixDigitalRain  
 [3] GitHub, "Digital Rain Project in C++", [Online]. Available: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html  
 [4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: https://github.com/st3w/neo  
@@ -284,5 +284,14 @@ These are the resources I used while working on the project:
 [6] Geeks for Geeks, "How to Print Colored Text to the Linux Terminal", [Online]. Available: https://www.geeksforgeeks.org/how-to-print-colored-text-to-the-linux-terminal/  
 [7] Geeks for Geeks, "How to Generate Random Number in Range in C++?", [Online]. Available: https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/  
 [8] ChatGPT. (GPT-4). Open AI. [Online]. Available: https://chatgpt.com/  
-[9] Learn C++. [Online]. Available: https://www.learncpp.com/  
-[10] Stack Overflow, "What's the best strategy to get rid of "warning C4267 possible loss of data"?", [Online]. Available: https://stackoverflow.com/questions/36834799/whats-the-best-strategy-to-get-rid-of-warning-c4267-possible-loss-of-data
+[9] Learn C++. "Learn C++", [Online]. Available: https://www.learncpp.com/  
+[10] Stack Overflow, "What's the best strategy to get rid of "warning C4267 possible loss of data"?", [Online]. Available: https://stackoverflow.com/questions/36834799/whats-the-best-strategy-to-get-rid-of-warning-c4267-possible-loss-of-data  
+[11] DevDocs, "C++ documentation", [Online]. Available: https://devdocs.io/cpp/  
+[12] Cppreference, "C++ reference", [Online]. Available: https://en.cppreference.com/w/  
+[13] Geeks for Geeks, "Vector push_back() in C++ STL", [Online]. Available: https://www.geeksforgeeks.org/vector-push-back-cpp-stl/  
+[14] W3Schools, "C++ Exceptions", [Online]. Available: https://www.w3schools.com/cpp/cpp_exceptions.asp  
+[15] W3Schools, "C++ Tutorial", [Online]. Available: https://www.w3schools.com/cpp/default.asp  
+[16] Medium, "C++ Classes and Objects", [Online]. Available: https://medium.com/@pawan2505/c-classes-and-objects-4c60de81aa2d  
+[17] Learn C++, "Generating random numbers using Mersenne Twister", [Online]. Available: https://www.learncpp.com/cpp-tutorial/generating-random-numbers-using-mersenne-twister/  
+[18] Geeks for Geeks, "Sleep Function in C++", [Online]. Available: https://www.geeksforgeeks.org/sleep-function-in-cpp/  
+[19] Geeks for Geeks, "Implementation of a Falling Matrix", [Online]. Available: https://www.geeksforgeeks.org/implementation-falling-matrix/
