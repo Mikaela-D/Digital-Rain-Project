@@ -266,9 +266,10 @@ if (raindrop.getY() - raindrop.getLength() >= screenHeight) {
 
 ## Modern C++ Insight and Reflection
 
-Modern C++ tools, like std::vector and std::mt19937, were essential for simplifying my project. I used std::vector to manage the raindrop properties like characters and colours.  
-For randomness, I used std::mt19937 to generate random values, making sure that each raindrop was unique.  
-These modern C++ features made the implementation smoother and more efficient than I expected.
+In my digital rain project, modern C++ tools like std::vector and std::mt19937 played an important role in simplifying the implementation.  
+I used std::vector to store and manage the properties of each raindrop, such as the characters and colours, making the data handling more organised and flexible.  
+For adding variety and randomness, I used std::mt19937 to generate random values for each raindrop, making sure they appeared unique and dynamic.  
+These C++ features made the coding process much easier and faster, allowing me to focus more on the main ideas of the project instead of getting caught up in complex data structures.
 
 ---
 
