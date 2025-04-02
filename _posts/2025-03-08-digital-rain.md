@@ -80,10 +80,10 @@ std::string randomColor() {
 ```
 ### 3. Raindrops fall continuously and disappear gradually when hitting the 'ground'
 
-I move the raindrops down by incrementing their y value using drop.y++.  
-I use an if statement to check if the raindrop has gone past the bottom of the screen.
-If the if statement is true, I reset the raindrop to the top and assign a new random x position to make it fall from a new location.
-I randomise the length of the raindrop, generate new random characters, and assign random colours to each character in the raindrop using the for loop.
+I move the raindrops down by incrementing their y value using drop.y++. This means that with each function call, every raindrop's vertical position is increased, creating the falling effect.  
+I use an if statement to check if the raindrop has gone beyond the bottom of the screen. The condition raindrop.getY() - raindrop.getLength() >= screenHeight makes sure that the entire length of the raindrop is off-screen before resetting its position.  
+If the if statement is true, I reset the raindrop to the top and assign a new random x position to make it fall from a new location. The x-coordinate is randomised using randomInt(0, screenWidth - 1), making sure that each raindrop starts from a different horizontal position.  
+I randomise the length of the raindrop, generate new random characters, and assign random colours to each character in the raindrop using the for loop. The length is determined using randomInt(minLength, maxLength), which adds variation in raindrop lengths. The characters are assigned using randomChars(raindrop.getLength()), making each raindrop have a unique set of characters. Also, a new vector of colours is created, and each character in the raindrop is assigned a random colour using randomColor().
 
 ```cpp
 void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screenHeight, int minLength, int maxLength) {
