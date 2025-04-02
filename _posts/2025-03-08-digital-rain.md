@@ -171,7 +171,8 @@ void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
 
 I added a simple testing function testSimulateRainfall to test that the simulateRainfall function works correctly.  
 In the testSimulateRainfall function, I call simulateRainfall with specific parameters that I set.  
-I make the test function work by commenting out the simulateRainfall function in main.cpp and adding testSimulateRainfall instead.
+I make the test function work by commenting out the simulateRainfall function in main.cpp and adding testSimulateRainfall instead.  
+While developing, I used AI [8] for error detection and debugging.
 
 Test.h File
 ```cpp
@@ -200,7 +201,7 @@ void testSimulateRainfall() {
 }
 ```
 main.cpp File  
-I also included a basic try-catch to catch and print any errors.
+I also included a basic try-catch to catch and print any errors. Referenced [14] for learning.
 ```cpp
 int main() {
 	try {
