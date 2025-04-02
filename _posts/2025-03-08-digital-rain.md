@@ -13,7 +13,7 @@ For my C++ Programming Module, I developed a Digital Rain project using modern C
 
 Digital Rain is the visual effect of vertically falling computer code [1], which appeared in the Matrix movies. Digital Rain has been used in numerous computer and video games and films since it was introduced and popularised by the now world-renowned "The Matrix" movie produced by Simon Whiteley and his wife. Digital Rain is a cascade of dropping lines of randomly combined characters simulating rain. 
 
-When I started this project, I wanted to recreate the digital rain effect using modern C++. I viewed online resources to get inspiration for my project, such as [2], [3], [4], and [19].  
+When I started this project, I wanted to recreate the digital rain effect using modern C++. I viewed online resources to get inspiration for my project, such as [2], [3], [4], [19], and [22].  
 I explored methods to store arrays of random characters in vectors, which allowed me to efficiently process and print them as single strings. 
 Also, I used ANSI escape codes for colour and cursor control, which made the rainfall effect more visually appealing by making the rainfall colourful and hiding or showing the cursor. 
 
@@ -294,4 +294,7 @@ These are the resources I used while working on the project:
 [16] Medium, "C++ Classes and Objects", [Online]. Available: https://medium.com/@pawan2505/c-classes-and-objects-4c60de81aa2d  
 [17] Learn C++, "Generating random numbers using Mersenne Twister", [Online]. Available: https://www.learncpp.com/cpp-tutorial/generating-random-numbers-using-mersenne-twister/  
 [18] Geeks for Geeks, "Sleep Function in C++", [Online]. Available: https://www.geeksforgeeks.org/sleep-function-in-cpp/  
-[19] Geeks for Geeks, "Implementation of a Falling Matrix", [Online]. Available: https://www.geeksforgeeks.org/implementation-falling-matrix/
+[19] Geeks for Geeks, "Implementation of a Falling Matrix", [Online]. Available: https://www.geeksforgeeks.org/implementation-falling-matrix/  
+[20] Geeks for Geeks, "2D Vector in C++", [Online]. Available: https://www.geeksforgeeks.org/2d-vector-in-cpp-with-user-defined-size/  
+[21] Cppreference, "std::fill", [Online]. Available: https://en.cppreference.com/w/cpp/algorithm/fill  
+[22] Stack Overflow, "Creating rain drops", [Online]. Available: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
