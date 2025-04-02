@@ -126,7 +126,7 @@ int main() {
 5. Updating the Screen
 
 The clearScreen function clears the screen so I can update it with the new positions and colors of the raindrops.
-'screen' is a 2D array that holds the characters representing the screen. It clears the screen by setting all characters to ' '.
+'screen' is a 2D array that holds the characters representing the screen. It clears the screen by setting all characters to ' '. It uses std::fill [21] to quickly set all elements of each row to a blank space.
 'colorScreen' is a 2D array that holds the colour codes for each character in the screen. It clears the colorScreen by setting all colours to the reset colour "\033[0m".
 
 ```cpp
