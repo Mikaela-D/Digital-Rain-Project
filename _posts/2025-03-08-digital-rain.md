@@ -216,16 +216,12 @@ int main() {
 
 ## Algorithm
 
-To create the algorithm to simulate the digital rain, I decided I wanted to have random characters and random colours for each raindrop. Also, random lengths for each raindrop. I already explained how I achieved those effects in the Design and Test, so here I will explain the main algorithm part for the simulateRainfall function. 
+To create the algorithm to simulate the digital rain, I decided I wanted to have random characters and random colours for each raindrop.  
+Also, random lengths for each raindrop. I already explained how I achieved those effects in the Design and Test, so here I will explain the main algorithm part for the simulateRainfall function. 
 
-It first generates a list of raindrops with random properties (position, length, symbols, and colors) using generateRaindrops.  
-Then, a Screen object is created to represent the display area with the specified width and height.  
-I hide the terminal cursor to avoid visual distraction during the animation.  
-In the while loop, the updateScreen function updates the screen with the current raindrop positions and symbols, and the screen is printed, showing the updated raindrops.  
-The moveRaindrops function moves the raindrops down the screen. If they go off the bottom, they restart at the top with new random properties.  
-The animation pauses for a short period (controlled using the animationSpeed variable) to control the speed of the rain effect.  
-After printing, the cursor is moved back to the top-left corner to avoid the animation from stacking up.  
-When the animation ends, the cursor is made visible again.
+The function begins by generating a list of raindrops with random properties (position, length, symbols, and colors) using the generateRaindrops function. These properties make sure that each raindrop is unique, adding variation to the digital rain effect. Then, a Screen object is created to represent the display area, with the specified width and height, which sets the boundaries for the animation. 
+To improve the visual experience and remove distractions, the terminal cursor is hidden at the beginning of the animation using the escape sequence \033[?25l. In the main loop, the updateScreen function is called to update the screen with the current positions and symbols of the raindrops, and the screen is printed to display the updated raindrops. The moveRaindrops function moves the raindrops down the screen. When a raindrop moves off the bottom of the screen, it restarts at the top with new random properties, keeping the animation dynamic.  
+To control the speed of the rain effect, the animation pauses for a short period using the animationSpeed variable, which controls how fast each frame of the animation is displayed. After each frame, the cursor is moved back to the top-left corner of the terminal using the escape sequence \033[H, preventing the animation from stacking up. When the animation ends, the cursor is made visible again using the escape sequence \033[?25h.
 
 ```cpp
 void simulateRainfall(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength, int animationSpeed) {
