@@ -32,6 +32,8 @@ For this project, I designed the following features:
 5. The screen will be updated in each iteration to display falling raindrops without flickering.
 6. A function to test the simulation works.
 
+Some general resources I used during the development are [9], [11], [12], [13] for generateRaindrops(), and [15].
+
 ### 1. Random Characters
 To generate random characters, I reused a function called randomInt that  generates a random integer within a given range between a minimum and a maximum number.
 I learned how to make this function using [7] and [17].
