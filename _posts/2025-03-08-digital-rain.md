@@ -276,7 +276,7 @@ These C++ features made the coding process much easier and faster, allowing me t
 ## References
 These are the resources I used while working on the project:
 
-[1] Wikipedia, "Matrix Rain Algorithms", [Online]. Available: <a href="https://en.wikipedia.org/wiki/Matrix_digital_rain">  
+[1] Wikipedia, "Matrix Rain Algorithms", [Online]. Available: <a href="https://en.wikipedia.org/wiki/Matrix_digital_rain"></a>  
 [2] GitHub, "Matrix Digital Rain", [Online]. Available: https://github.com/Kevger/MatrixDigitalRain  
 [3] GitHub, "Digital Rain Project in C++", [Online]. Available: https://sarahmatu.github.io/DigiRainProject/demo/2024/03/11/DigiRainProject.html  
 [4] GitHub, "Neo Matrix Digital Rain", [Online]. Available: https://github.com/st3w/neo  
