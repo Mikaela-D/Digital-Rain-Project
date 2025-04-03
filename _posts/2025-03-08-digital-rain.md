@@ -25,7 +25,7 @@ So, what my project does is it simulates the iconic falling code effect seen in 
 
 For this project, I designed the following features:
 
-1. Raindrop design
+1. Raindrop design.
 2. Characters inside the raindrops will be randomly selected from uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).
 3. Each character inside a raindrop will have a randomly assigned colour.
 4. Raindrops will fall continuously and disappear gradually when hitting the 'ground'.
