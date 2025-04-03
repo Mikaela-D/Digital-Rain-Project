@@ -130,7 +130,7 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screen
 }
 ```
 
-### 5. Customisation of screen size, number of raindrops, raindrop length, and animation speed
+### 5. Customisation (Screen Size, Number of Raindrops, Raindrop Length, and Animation Speed)
 
 I allow passing these values to simulateRainfall in its declaration.
 
