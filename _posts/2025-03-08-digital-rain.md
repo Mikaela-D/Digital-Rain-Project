@@ -25,16 +25,40 @@ So, what my project does is it simulates the iconic falling code effect seen in 
 
 For this project, I designed the following features:
 
-1. Characters inside the raindrops will be randomly selected from uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).
-2. Each character inside a raindrop will have a randomly assigned colour.
-3. Raindrops will fall continuously and disappear gradually when hitting the 'ground'.
-4. The simulation will allow customisation of screen size, number of raindrops, raindrop length, and animation speed.
-5. The screen will be updated in each iteration to display falling raindrops without flickering.
-6. A function to test the simulation works.
+1. Raindrop design
+2. Characters inside the raindrops will be randomly selected from uppercase and lowercase letters (A-Z, a-z) and numbers (0-9).
+3. Each character inside a raindrop will have a randomly assigned colour.
+4. Raindrops will fall continuously and disappear gradually when hitting the 'ground'.
+5. The simulation will allow customisation of screen size, number of raindrops, raindrop length, and animation speed.
+6. The screen will be updated in each iteration to display falling raindrops without flickering.
+7. A function to test the simulation works.
 
 Some general resources I used during the development are [9], [11], [12], [13] for generateRaindrops(), and [15]. I also used [16] for information about using classes and objects in C++.
 
-### 1. Random Characters
+### 1. Raindrop Design
+
+Every raindrop in the simulation is represented as an object with specific properties (position, length, symbols, and colors). The function generateRaindrops() creates a collection of raindrops, each of them having random properties.  
+How it works is: the function first determines the length of each raindrop by selecting a random value within a specified range (randomInt(minLength, maxLength)). Then it generates a sequence of random characters consisting of uppercase and lowercase letters (A-Z, a-z) and numbers (0-9). Also, every character inside the raindrop is assigned a random colour, making every raindrop different.  
+The initial position of the raindrop is also randomly determined within the screen’s width and height (randomInt(0, screenWidth - 1) and randomInt(0, screenHeight - 1)), making sure the raindrop distribution is scattered across the display.
+
+```cpp
+std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength) {
+	std::vector<Raindrop> raindrops;
+	for (int i = 0; i < numRaindrops; ++i) {
+		int length = randomInt(minLength, maxLength);
+		std::vector<char> symbols = randomChars(length);
+		std::vector<std::string> colors(length);
+		for (std::string& color : colors) {
+			color = randomColor();
+		}
+		Raindrop raindrop(randomInt(0, screenWidth - 1), randomInt(0, screenHeight - 1), length, symbols, colors);
+		raindrops.push_back(raindrop);
+	}
+	return raindrops;
+}
+```
+
+### 2. Random Characters
 To generate random characters, I reused a function called randomInt that  generates a random integer within a given range between a minimum and a maximum number.
 I learned how to make this function using [7] and [17].
 
@@ -69,7 +93,7 @@ std::vector<char> randomChars(int length) {
 }
 ```
 
-### 2. Randomly Assigned Colour
+### 3. Randomly Assigned Colour
 
 The randomColor function selects a random colour from the COLORS array and assigns it to a character. I found the colour codes using [5] and [6].  
 It works by generating a random index within the valid range of the COLORS array.  
@@ -80,7 +104,7 @@ std::string randomColor() {
 	return COLORS[randomInt(0, static_cast<int>(std::size(COLORS)) - 1)];
 }
 ```
-### 3. Raindrops fall continuously and disappear gradually when hitting the 'ground'
+### 4. Raindrops fall continuously and disappear gradually when hitting the 'ground'
 
 I move the raindrops down by incrementing their y value using drop.y++. This means that with each function call, every raindrop's vertical position is increased, creating the falling effect.  
 I use an if statement to check if the raindrop has gone beyond the bottom of the screen. The condition raindrop.getY() - raindrop.getLength() >= screenHeight makes sure that the entire length of the raindrop is off-screen before resetting its position.  
@@ -106,7 +130,7 @@ void moveRaindrops(std::vector<Raindrop>& raindrops, int screenWidth, int screen
 }
 ```
 
-### 4. Customisation of screen size, number of raindrops, raindrop length, and animation speed
+### 5. Customisation of screen size, number of raindrops, raindrop length, and animation speed
 
 I allow passing these values to simulateRainfall in its declaration.
 
@@ -123,7 +147,7 @@ int main() {
 }
 ```
 
-5. Updating the Screen
+### 6. Updating the Screen
 
 The clearScreen function clears the screen so I can update it with the new positions and colors of the raindrops.
 'screen' is a 2D array [20] that holds the characters representing the screen. It clears the screen by setting all characters to ' '. It uses std::fill [21] to quickly set all elements of each row to a blank space.
@@ -169,7 +193,7 @@ void Screen::drawSymbol(int x, int y, char symbol, const std::string& color) {
 	}
 }
 ```
-### Testing Function
+### 7. Testing Function
 
 I added a simple testing function testSimulateRainfall to test that the simulateRainfall function works correctly.  
 In the testSimulateRainfall function, I call simulateRainfall with specific parameters that I set.  
