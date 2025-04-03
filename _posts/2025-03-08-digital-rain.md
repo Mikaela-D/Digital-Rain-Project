@@ -39,7 +39,7 @@ Some general resources I used during the development are [9], [11], [12], [13] f
 
 Every raindrop in the simulation is represented as an object with specific properties (position, length, symbols, and colors). The function generateRaindrops() creates a collection of raindrops, each of them having random properties.  
 How it works is: the function first determines the length of each raindrop by selecting a random value within a specified range (randomInt(minLength, maxLength)). Then it generates a sequence of random characters consisting of uppercase and lowercase letters (A-Z, a-z) and numbers (0-9). Also, every character inside the raindrop is assigned a random colour, making every raindrop different.  
-The initial position of the raindrop is also randomly determined within the screen’s width and height (randomInt(0, screenWidth - 1) and randomInt(0, screenHeight - 1)), making sure the raindrop distribution is scattered across the display.
+The initial position of the raindrop is also randomly determined within the screen’s width and height (randomInt(0, screenWidth - 1) and randomInt(0, screenHeight - 1)), making sure the raindrops are scattered across the display.
 
 ```cpp
 std::vector<Raindrop> generateRaindrops(int screenWidth, int screenHeight, int numRaindrops, int minLength, int maxLength) {
